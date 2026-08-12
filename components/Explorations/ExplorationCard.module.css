@@ -1,0 +1,63 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background: var(--panel-dark);
+  border: 1px solid var(--dark-border);
+  border-radius: 0.475em;
+  padding: 1.25em;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.number {
+  font-family: var(--font-display);
+  font-size: 1.6em;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  justify-content: flex-end;
+}
+
+.tag {
+  font-size: 0.7em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.25em 0.6em;
+  border-radius: 999px;
+  background: var(--nav-item-dark);
+  color: var(--white);
+}
+
+.statusTag {
+  background: var(--yellow);
+  color: var(--black);
+}
+
+.title {
+  font-size: 1.65em;
+  color: var(--white);
+}
+
+.copy {
+  font-size: 1em;
+  color: var(--white);
+  opacity: 0.85;
+}
+
+.arrow {
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--yellow);
+}

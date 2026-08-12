@@ -1,0 +1,47 @@
+.journey {
+  position: relative;
+  padding: 5em 0;
+  background: var(--sand);
+}
+
+@media (min-width: 768px) {
+  .journey {
+    margin-top: -1170px;
+  }
+}
+
+.header {
+  max-width: 700px;
+  margin-bottom: 3em;
+}
+
+.heading {
+  font-size: clamp(1.6em, 8vw, 4em);
+  margin-top: 0.4em;
+  margin-bottom: 0.6em;
+}
+
+.intro {
+  font-size: 1.15em;
+  line-height: 1.6;
+}
+
+.track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5em;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  transition: background 0.4s ease;
+}
+
+.scrimActive {
+  background: rgba(0, 0, 0, 0.15);
+}

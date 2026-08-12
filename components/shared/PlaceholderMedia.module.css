@@ -1,0 +1,50 @@
+.placeholder {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0.475em;
+  border: 1px solid var(--light-border);
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--stripe-a) 0 12px,
+    var(--stripe-b) 12px 24px
+  );
+}
+
+.sand {
+  --stripe-a: var(--sand);
+  --stripe-b: var(--card);
+  color: var(--black);
+}
+
+.dark {
+  --stripe-a: var(--dark-surface);
+  --stripe-b: #2b2b2b;
+  color: var(--white);
+  border-color: var(--dark-border);
+}
+
+.yellow {
+  --stripe-a: var(--yellow);
+  --stripe-b: #e6e600;
+  color: var(--black);
+}
+
+.label {
+  font-family: var(--font-display);
+  font-size: 0.822em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.75em 1em;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 0.3em;
+}
+
+.dark .label {
+  background: rgba(0, 0, 0, 0.35);
+}

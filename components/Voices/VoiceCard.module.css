@@ -1,0 +1,31 @@
+.card {
+  background: var(--card);
+  border: 1px solid var(--light-border);
+  border-radius: 0.475em;
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.quote {
+  font-size: 1.05em;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.placeholder {
+  color: var(--muted);
+}
+
+.name {
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+.role {
+  font-size: 0.822em;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

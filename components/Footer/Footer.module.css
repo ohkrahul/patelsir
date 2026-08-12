@@ -1,0 +1,26 @@
+.footer {
+  position: relative;
+  padding: 5em 0 3em;
+}
+
+.wordmark {
+  font-size: clamp(2em, 14vw, 6.475em);
+  line-height: 0.9;
+  text-align: center;
+  color: var(--black);
+}
+
+.copyRow {
+  text-align: center;
+  margin: 1em 0 3em;
+}
+
+.copy {
+  font-size: clamp(1.2em, 6vw, 2em);
+}
+
+.tagline {
+  margin-top: 0.5em;
+  font-size: 1em;
+  color: var(--muted);
+}

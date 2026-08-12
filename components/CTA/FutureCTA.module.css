@@ -1,0 +1,32 @@
+.cta {
+  padding: 5em 0;
+  text-align: center;
+}
+
+.heading {
+  font-size: clamp(1.6em, 8vw, 4em);
+}
+
+.secondary {
+  font-size: clamp(1.6em, 8vw, 4em);
+  color: var(--muted);
+}
+
+.copy {
+  max-width: 640px;
+  margin: 1.5em auto 2em;
+  font-size: 1.15em;
+  line-height: 1.6;
+}
+
+.button {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--black);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1em;
+  letter-spacing: 0.02em;
+  padding: 0.75em 1.5em;
+  border-radius: 999px;
+}

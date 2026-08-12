@@ -1,0 +1,45 @@
+.explorations {
+  position: relative;
+  margin-left: -1.25em;
+  margin-right: -1.25em;
+  background: var(--dark-surface);
+  color: var(--white);
+  padding: 5em 1.25em;
+}
+
+@media (min-width: 768px) {
+  .explorations {
+    margin-left: calc(-1 * var(--content-left));
+    margin-right: -2.5em;
+    padding-left: var(--content-left);
+    padding-right: 2.5em;
+  }
+}
+
+.header {
+  max-width: 700px;
+  margin-bottom: 3em;
+}
+
+.eyebrow {
+  color: var(--muted);
+}
+
+.heading {
+  font-size: clamp(1.6em, 8vw, 4em);
+  margin-top: 0.4em;
+  margin-bottom: 0.6em;
+  color: var(--white);
+}
+
+.intro {
+  font-size: 1.15em;
+  line-height: 1.6;
+  color: var(--white);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5em;
+}
