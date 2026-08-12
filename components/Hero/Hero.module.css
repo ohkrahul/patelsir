@@ -45,7 +45,11 @@
     right: 0;
     top: 36%;
     padding: 0 2.5em;
-    z-index: 5;
+    /* Above heroMorph's highest z-index (45) — a lower value here would
+       cap the fixed nav links' own z-index at this stacking context's
+       level for any comparison against siblings outside it (e.g. the
+       wordmark), no matter how high their own z-index is set to. */
+    z-index: 50;
   }
 }
 
@@ -255,7 +259,10 @@
 @media (min-width: 768px) {
   .card {
     position: absolute;
-    z-index: 3;
+    /* Above the wordmark's morph z-index (40) — otherwise this card
+       becomes a stacking context that caps its stat-value child's own
+       (higher) z-index at this level for comparisons outside the card. */
+    z-index: 46;
     background: rgba(40, 40, 40, 0.35);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
