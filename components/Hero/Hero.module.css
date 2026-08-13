@@ -43,7 +43,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 36%;
+    top: 48%;
     padding: 0 2.5em;
     /* Above heroMorph's highest z-index (45) — a lower value here would
        cap the fixed nav links' own z-index at this stacking context's
@@ -140,7 +140,11 @@
     border-radius: 0;
     box-shadow: none;
     border: none;
-    z-index: 2;
+    /* Above the wordmark's morph z-index (40, set inline by heroMorph.ts
+       once it's fixed-position) so the portrait stays in front of it
+       through the whole scroll, not just at rest. Below the nav row (50)
+       and stat cards (46) so those keep reading on top of the photo. */
+    z-index: 43;
   }
 
   .portraitWrap img {
@@ -214,11 +218,14 @@
 @media (min-width: 768px) {
   .headline {
     position: absolute;
-    left: 31%;
+    left: 50%;
     bottom: 15%;
-    z-index: 3;
-    text-align: left;
-    max-width: 32%;
+    transform: translateX(-50%);
+    /* Above the portrait's z-index (43) so the headline doesn't get cut
+       off behind the photo like the stat cards would be otherwise. */
+    z-index: 44;
+    text-align: center;
+    max-width: 40%;
   }
 
   .headline h2 {
@@ -246,6 +253,10 @@
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background: var(--hero-glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -274,29 +285,33 @@
 
   .card:nth-of-type(1) {
     left: 18%;
-    bottom: 56%;
+    bottom: 32%;
   }
 
   .card:nth-of-type(2) {
     left: 18%;
-    bottom: 41%;
+    bottom: 9%;
   }
 
   .card:nth-of-type(3) {
     right: 18%;
-    bottom: 46%;
+    bottom: 22%;
     width: 15%;
     text-align: left;
   }
 }
 
 .statValue {
+  width: 100%;
+  text-align: center;
   font-family: var(--font-display);
   font-size: 2.6em;
   font-weight: 800;
 }
 
 .statLabel {
+  width: 100%;
+  text-align: center;
   font-size: 0.822em;
   letter-spacing: 0.05em;
   text-transform: uppercase;
