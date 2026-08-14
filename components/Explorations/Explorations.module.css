@@ -4,42 +4,149 @@
   margin-right: -1.25em;
   background: var(--dark-surface);
   color: var(--white);
-  padding: 5em 1.25em;
+  padding: 5em 0;
 }
 
 @media (min-width: 768px) {
   .explorations {
     margin-left: calc(-1 * var(--content-left));
     margin-right: -2.5em;
-    padding-left: var(--content-left);
-    padding-right: 2.5em;
+    padding: 0;
+    /* A bit further in than --content-left (used by every other section) —
+       heynesh's Selected Work gives the sidebar noticeably more breathing
+       room than the rest of the page. Height is set in JS (matching the
+       track's own measured overflow) once the horizontal-scroll animation
+       initializes; this is just a safe pre-JS/no-JS fallback so the section
+       still reads as a normal (if tall) block. */
+    --exp-content-left: calc(var(--content-left) + 60px);
+    /* Where the horizontal-scroll viewport's own left edge sits — safely
+       past the intro column's own max possible extent (its left offset +
+       max-width), plus a small buffer. Cards sliding left during the
+       horizontal scroll get clipped here by .viewport's overflow:hidden,
+       so they can never render behind the heading/copy or under the
+       sidebar, regardless of how far the track has to travel. */
+    --exp-clip-left: calc(var(--exp-content-left) + 520px + 24px);
+    height: 3600px;
   }
 }
 
-.header {
-  max-width: 700px;
-  margin-bottom: 3em;
+.sticky {
+  position: relative;
 }
 
-.eyebrow {
-  color: var(--muted);
-}
-
-.heading {
-  font-size: clamp(1.6em, 8vw, 4em);
-  margin-top: 0.4em;
-  margin-bottom: 0.6em;
-  color: var(--white);
+@media (min-width: 768px) {
+  .sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
 }
 
 .intro {
-  font-size: 1.15em;
-  line-height: 1.6;
-  color: var(--white);
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  padding: 0 1.25em;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+@media (min-width: 768px) {
+  .intro {
+    /* margin, not padding — the universal box-sizing:border-box reset
+       means padding-left would eat into max-width's own budget, leaving
+       far too little room for the actual heading/copy text. Margin sits
+       outside the box model's width calculation, so the two stay independent. */
+    padding: 0;
+    margin: clamp(40px, 6vh, 80px) 0 0 var(--exp-content-left);
+  }
+}
+
+.label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.95em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.heading {
+  margin-top: 0.5em;
+  margin-bottom: 0.6em;
+  color: var(--white);
+  font-size: clamp(2.4em, 8vw, 3.2em);
+  line-height: 0.94;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  .heading {
+    font-size: clamp(64px, 5vw, 82px);
+    letter-spacing: -0.04em;
+  }
+}
+
+.headingLineMask {
+  display: block;
+  overflow: hidden;
+}
+
+.headingLineInner {
+  display: block;
+}
+
+.copy {
+  margin-top: 1.5em;
+  color: var(--white);
+  font-size: 1.05em;
+  line-height: 1.45;
+}
+
+@media (min-width: 768px) {
+  .copy {
+    margin-top: 2.5em;
+    font-size: clamp(18px, 1.1vw, 21px);
+  }
+}
+
+/* Mobile: cards stack normally underneath the intro, in document flow. */
+.viewport {
+  margin-top: 3em;
+  padding: 0 1.25em;
+}
+
+.track {
+  display: flex;
+  flex-direction: column;
   gap: 1.5em;
+}
+
+@media (min-width: 768px) {
+  .viewport {
+    position: absolute;
+    left: var(--exp-clip-left);
+    top: clamp(200px, 25vh, 235px);
+    width: calc(100% - var(--exp-clip-left));
+    height: clamp(560px, 68vh, 640px);
+    margin-top: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .track {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    width: max-content;
+    height: 100%;
+    gap: 36px;
+    /* Pushes card 01 well past the intro column instead of starting right
+       under the sidebar — the defining trait of heynesh's composition:
+       intro occupies the left-center, the first big card enters from the
+       right rather than sitting flush beside the heading. Relative to
+       .viewport's own (already-shifted) left edge, so card 01's absolute
+       screen position stays the same regardless of --exp-clip-left. */
+    padding-left: max(0px, calc(clamp(720px, 51vw, 900px) - var(--exp-clip-left)));
+    padding-right: 220px;
+  }
 }

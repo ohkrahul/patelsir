@@ -8,6 +8,7 @@ import { createHeroMorph } from "@/animations/heroMorph";
 import { createSidebarScale } from "@/animations/sidebar";
 import { createThemeSwitcher } from "@/animations/themeSwitcher";
 import { createJourneyAnimations } from "@/animations/journey";
+import { createExplorationsAnimations } from "@/animations/explorations";
 import { createScrollSpy } from "@/animations/scrollSpy";
 import { playPreloader, type PreloaderHandle } from "@/animations/preloader";
 import { MOTION, isDesktopMotionActive, prefersReducedMotion } from "@/animations/config";
@@ -22,6 +23,7 @@ export function useAnimationEngine() {
     const lenisEngine = createLenisEngine();
     let desktopHandles: Handle[] = [];
     let journeyHandle: Handle | null = null;
+    let explorationsHandle: Handle | null = null;
     let scrollSpyHandle: Handle | null = null;
     let preloaderHandle: PreloaderHandle | null = null;
 
@@ -73,6 +75,11 @@ export function useAnimationEngine() {
       await document.fonts.ready;
       if (cancelled) return;
 
+      // Explorations sets its own section height (matching how far its
+      // track actually overflows) before metrics is computed — otherwise
+      // themeSwitcher would bake in dark-transition boundaries measured
+      // against the pre-JS CSS fallback height instead of the real one.
+      explorationsHandle = createExplorationsAnimations();
       setupDesktopMotion();
       journeyHandle = createJourneyAnimations();
       scrollSpyHandle = createScrollSpy();
@@ -85,6 +92,9 @@ export function useAnimationEngine() {
     function onResize() {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
+        // Refresh first so Explorations' onRefreshInit fixes the section
+        // height before setupDesktopMotion reads it via computeMetrics.
+        ScrollTrigger.refresh();
         setupDesktopMotion();
         ScrollTrigger.refresh();
       }, MOTION.resizeDebounce);
@@ -98,6 +108,7 @@ export function useAnimationEngine() {
       preloaderHandle?.cancel();
       teardownDesktopMotion();
       journeyHandle?.destroy();
+      explorationsHandle?.destroy();
       scrollSpyHandle?.destroy();
       lenisEngine.destroy();
     };

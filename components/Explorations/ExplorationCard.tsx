@@ -10,26 +10,36 @@ export default function ExplorationCard({
   anchorId?: string;
 }) {
   return (
-    <article id={anchorId} className={styles.card}>
-      <div className={styles.top}>
-        <span className={styles.number}>{card.number}</span>
-        <div className={styles.tags}>
-          {card.tags.map((tag) => (
-            <span
-              key={tag}
-              className={`${styles.tag} ${card.status ? styles.statusTag : ""}`}
-            >
-              {card.status === "in-progress" && tag === "COMING SOON" ? "IN PROGRESS…" : tag}
-            </span>
-          ))}
+    <article id={anchorId} className={styles.card} data-anim="exploration-card">
+      <div className={styles.media}>
+        <PlaceholderMedia
+          label={card.title}
+          tone="dark"
+          className={styles.mediaFill}
+        />
+        <div className={styles.mediaOverlay}>
+          <span className={styles.number}>{card.number}</span>
+          <div className={styles.tags}>
+            {card.tags.map((tag) => (
+              <span
+                key={tag}
+                className={`${styles.tag} ${card.status ? styles.statusTag : ""}`}
+              >
+                {card.status === "in-progress" && tag === "COMING SOON" ? "IN PROGRESS…" : tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
-      <PlaceholderMedia label={card.title} tone="sand" aspectRatio="16 / 10" />
-      <h3 className={styles.title}>{card.title}</h3>
-      <p className={styles.copy}>{card.copy}</p>
-      <span className={styles.arrow} aria-hidden="true">
-        →
-      </span>
+      <div className={styles.body}>
+        <h3 className={styles.title}>{card.title}</h3>
+        <p className={styles.copy}>{card.copy}</p>
+        <div className={styles.arrowRow}>
+          <span className={styles.arrow} aria-hidden="true">
+            ↗
+          </span>
+        </div>
+      </div>
     </article>
   );
 }
