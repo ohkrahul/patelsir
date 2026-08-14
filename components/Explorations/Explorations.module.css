@@ -125,9 +125,13 @@
   .viewport {
     position: absolute;
     left: var(--exp-clip-left);
-    top: clamp(200px, 25vh, 235px);
+    /* No floor on either value (0px min is a no-op below the ceiling) —
+       a hard px floor here doesn't shrink on short/zoomed-in windows, so
+       top+height can exceed the sticky container's own height and push
+       the card's bottom (title/copy/arrow) past the visible viewport. */
+    top: clamp(0px, 25vh, 235px);
     width: calc(100% - var(--exp-clip-left));
-    height: clamp(560px, 68vh, 640px);
+    height: clamp(0px, 68vh, 640px);
     margin-top: 0;
     padding: 0;
     overflow: hidden;

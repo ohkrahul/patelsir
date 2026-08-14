@@ -4,7 +4,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const NAV_IDS = ["home", "about", "explorations", "interests", "voices", "faq"];
 
 const ACTIVE_COLOR = "#ffff23";
-const INACTIVE_COLOR = "#000000";
+// scrollSpy sets an inline color on each nav link, which overrides
+// whatever light/dark theme the sidebar panel underneath switches to (see
+// themeSwitcher.ts) — black inactive text is invisible against Explorations'
+// dark panel background, so it needs its own dark-aware value here too.
+const INACTIVE_COLOR_LIGHT = "#000000";
+const INACTIVE_COLOR_DARK = "#a6a6a6"; // matches var(--muted)
 const INACTIVE_OPACITY = 0.45;
 
 export type ScrollSpyHandle = {
@@ -44,11 +49,15 @@ export function createScrollSpy(): ScrollSpyHandle | null {
     }
     if (active === current) return;
     current = active;
+    // Explorations is the one dark-themed section right now (see
+    // metrics.ts/themeSwitcher.ts) — inactive links need the light-gray
+    // reading while it's active, same as everywhere else on the sidebar.
+    const inactiveColor = active === "explorations" ? INACTIVE_COLOR_DARK : INACTIVE_COLOR_LIGHT;
     NAV_IDS.forEach((id) => {
       const isActive = id === active;
       gsap.to(linksFor(id), {
         opacity: isActive ? 1 : INACTIVE_OPACITY,
-        color: isActive ? ACTIVE_COLOR : INACTIVE_COLOR,
+        color: isActive ? ACTIVE_COLOR : inactiveColor,
         duration: 0.3,
       });
     });

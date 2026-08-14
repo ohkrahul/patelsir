@@ -13,7 +13,10 @@
 @media (min-width: 768px) {
   .card {
     width: clamp(380px, 25vw, 440px);
-    height: clamp(560px, 68vh, 640px);
+    /* Matches .viewport's own height formula exactly (see Explorations.module.css)
+       — no px floor, so the card can never grow taller than the sticky
+       viewport actually has room for on a short window. */
+    height: clamp(0px, 68vh, 640px);
     flex: 0 0 auto;
   }
 
@@ -32,7 +35,11 @@
 
 @media (min-width: 768px) {
   .media {
-    height: 390px;
+    /* Percentage of the card's own (already viewport-clamped) height, not
+       a fixed px — a fixed height doesn't shrink with the card on a short
+       window, so it eats into .body's space instead, squeezing the
+       title/copy/arrow out of what's left. */
+    height: 62%;
   }
 }
 
