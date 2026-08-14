@@ -17,6 +17,26 @@
   }
 }
 
+/* heroMorph.ts hides this chrome via inline style once it initializes,
+   but that's only after the ~3s preloader promise resolves — without
+   this CSS default, the sidebar sits fully visible (its plain fallback
+   state) for that whole window on every load. Mirrored here so it's
+   hidden from the very first paint, with no JS-timing gap. Gated to
+   exactly the conditions heroMorph itself requires (desktop, motion
+   allowed) so reduced-motion/no-JS users still get a visible sidebar,
+   since nothing will ever reveal it again for them otherwise. */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  :global(body.js) [data-anim="sidebar-panel"],
+  :global(body.js) [data-anim="sidebar-cta"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  :global(body.js) [data-anim="sidebar-root"] {
+    pointer-events: none;
+  }
+}
+
 .panel {
   background: var(--card-glass);
   backdrop-filter: blur(20px);
