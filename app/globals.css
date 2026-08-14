@@ -24,9 +24,14 @@
   --font-display: var(--font-archivo), sans-serif;
   --font-body: var(--font-switzer), sans-serif;
 
-  --sidebar-width: 267px;
+  /* 267px is the reference ("big screen") width — 13.9vw resolves to that
+     exact figure at 1920px and shrinks below it on narrower viewports
+     (a real small laptop, or just browser zoom shrinking the effective
+     CSS viewport) instead of holding a fixed width that eats a bigger
+     share of a narrower screen. Floors at 200px so nav labels still fit. */
+  --sidebar-width: clamp(200px, 13.9vw, 267px);
   --sidebar-offset: 20px;
-  --content-left: 302px;
+  --content-left: calc(var(--sidebar-offset) + var(--sidebar-width) + 15px);
 }
 
 * {

@@ -61,7 +61,7 @@
   font-weight: 800;
   color: var(--yellow);
   -webkit-text-stroke: 1px var(--black);
-  padding: 0.25em 0;
+  padding: 0.25em 1em;
 }
 
 .identity {
