@@ -38,6 +38,11 @@ const BINDING_DEFS: BindingDef[] = [
 ];
 
 const SIDEBAR_CHROME_RANGE: [number, number] = [0.55, 1];
+// Nav links start migrating at progress 0 and are mostly settled by
+// ~0.4-0.6 — tying the leftover hero text's fade-out to chromeT (which
+// doesn't even start until 0.55) meant it was still at full opacity
+// while nav links were actively stacking up on top of it.
+const OUTGOING_TEXT_RANGE: [number, number] = [0.1, 0.45];
 
 function measureRect(el: HTMLElement): Rect {
   const rect = el.getBoundingClientRect();
@@ -126,9 +131,12 @@ export function createHeroMorph(metrics: Metrics): HeroMorphHandle | null {
     const chromeT = gsap.utils.clamp(0, 1, (progress - chromeStart) / (chromeEnd - chromeStart));
     gsap.set(chromeEls, { opacity: chromeT });
     gsap.set(interactiveEls, { pointerEvents: chromeT > 0.9 ? "auto" : "none" });
+
+    const [outStart, outEnd] = OUTGOING_TEXT_RANGE;
+    const outgoingT = gsap.utils.clamp(0, 1, (progress - outStart) / (outEnd - outStart));
     gsap.set(outgoingCards, {
-      opacity: 1 - chromeT,
-      pointerEvents: chromeT > 0.1 ? "none" : "auto",
+      opacity: 1 - outgoingT,
+      pointerEvents: outgoingT > 0.1 ? "none" : "auto",
     });
 
     if (portraitEl) {
