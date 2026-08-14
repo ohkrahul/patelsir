@@ -19,7 +19,11 @@ const RIGHT_NAV = [
 const TRAITS = ["CURIOUS", "ANALYTICAL", "CREATIVE", "EXPLORATORY", "AMBITIOUS"];
 
 export default function Hero() {
-  const { containerRef, textRef } = useAutoFitWordmark<HTMLDivElement, HTMLHeadingElement>();
+  const { containerRef, innerRef, textRef } = useAutoFitWordmark<
+    HTMLDivElement,
+    HTMLDivElement,
+    HTMLHeadingElement
+  >();
 
   return (
     <section id="home" className={styles.hero}>
@@ -55,7 +59,7 @@ export default function Hero() {
 
         <div className={styles.composition}>
           <div ref={containerRef} className={styles.heroWordmark}>
-            <div className={styles.heroWordmarkInner}>
+            <div ref={innerRef} className={styles.heroWordmarkInner}>
               <h1 ref={textRef} className={styles.wordmarkShaurya} data-anim="hero-wordmark">
                 SHAURYA
               </h1>

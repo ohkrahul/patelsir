@@ -18,9 +18,11 @@ const PROBE_FONT_SIZE = 100;
 // element's rect once at boot) always measures the final, settled size.
 export function useAutoFitWordmark<
   ContainerEl extends HTMLElement = HTMLDivElement,
+  InnerEl extends HTMLElement = HTMLDivElement,
   TextEl extends HTMLElement = HTMLHeadingElement,
 >() {
   const containerRef = useRef<ContainerEl>(null);
+  const innerRef = useRef<InnerEl>(null);
   const textRef = useRef<TextEl>(null);
 
   useLayoutEffect(() => {
@@ -29,12 +31,34 @@ export function useAutoFitWordmark<
       const text = textRef.current;
       if (!container || !text) return;
 
+      // heroMorph.ts promotes this element to position:fixed the instant
+      // the page boots (well before any scrolling) and takes over its
+      // width/fontSize for its own FLIP interpolation, pinning width via
+      // inline style. An inline style always beats the CSS width:max-content
+      // rule below, so scrollWidth would stop reflecting the text's true
+      // content width and start reflecting that pinned value instead —
+      // refitting after that point reads the wrong number and corrupts the
+      // font-size. Once heroMorph has claimed the element, leave it alone.
+      if (getComputedStyle(text).position === "fixed") return;
+
       text.style.fontSize = `${PROBE_FONT_SIZE}px`;
       const availableWidth = container.clientWidth;
       const renderedWidth = text.scrollWidth;
       if (!renderedWidth || !availableWidth) return;
 
-      text.style.fontSize = `${PROBE_FONT_SIZE * ((availableWidth * FIT_FRACTION) / renderedWidth)}px`;
+      const targetWidth = availableWidth * FIT_FRACTION;
+      text.style.fontSize = `${PROBE_FONT_SIZE * (targetWidth / renderedWidth)}px`;
+
+      // The wrapper around the fitted text normally shrink-wraps to it
+      // (inline-block sized by in-flow content) so a sibling caption can
+      // hang off its corner via right:0 — but heroMorph.ts later promotes
+      // the text element to position:fixed once scrolling starts, pulling
+      // it out of flow entirely. Left alone, the wrapper would then
+      // collapse to whatever's left (the caption's own tiny width),
+      // wrecking that caption's positioning. Pinning an explicit width
+      // here keeps the wrapper's size stable regardless of what happens
+      // to the text element's positioning later.
+      if (innerRef.current) innerRef.current.style.width = `${targetWidth}px`;
     }
 
     fit();
@@ -45,5 +69,5 @@ export function useAutoFitWordmark<
     return () => observer.disconnect();
   }, []);
 
-  return { containerRef, textRef };
+  return { containerRef, innerRef, textRef };
 }

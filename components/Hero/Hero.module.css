@@ -125,6 +125,14 @@
 
 .wordmarkShaurya {
   display: block;
+  /* Without this, once useAutoFitWordmark pins an explicit (wider) width
+     on heroWordmarkInner, this block-level element stretches to fill it —
+     and the NEXT fit() call then measures that stretched box's width via
+     scrollWidth instead of the text's actual glyph width, collapsing the
+     computed font-size on every re-fit after the first. Keeping it sized
+     to its own content regardless of the parent's width breaks that
+     feedback loop. */
+  width: max-content;
   margin: 0;
   font-weight: 900;
   letter-spacing: -0.02em;
