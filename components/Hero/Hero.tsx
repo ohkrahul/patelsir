@@ -1,4 +1,7 @@
+"use client";
+
 import HoverText from "@/components/shared/HoverText";
+import { useAutoFitWordmark } from "@/hooks/useAutoFitWordmark";
 import styles from "./Hero.module.css";
 
 const LEFT_NAV = [
@@ -16,6 +19,8 @@ const RIGHT_NAV = [
 const TRAITS = ["CURIOUS", "ANALYTICAL", "CREATIVE", "EXPLORATORY", "AMBITIOUS"];
 
 export default function Hero() {
+  const { containerRef, textRef } = useAutoFitWordmark<HTMLDivElement, HTMLHeadingElement>();
+
   return (
     <section id="home" className={styles.hero}>
       <div className={styles.heroSticky}>
@@ -49,12 +54,19 @@ export default function Hero() {
         </div>
 
         <div className={styles.composition}>
-          <h1 className={styles.wordmark} data-anim="hero-wordmark">
-            PATEL
-          </h1>
+          <div ref={containerRef} className={styles.heroWordmark}>
+            <div className={styles.heroWordmarkInner}>
+              <h1 ref={textRef} className={styles.wordmarkShaurya} data-anim="hero-wordmark">
+                SHAURYA
+              </h1>
+              <span className={styles.wordmark} data-anim="hero-wordmark-secondary">
+                PATEL
+              </span>
+            </div>
+          </div>
           <div className={styles.portraitWrap} data-anim="hero-portrait-wrap">
             <img
-              src="/shaurya/portrait.png"
+              src="/shaurya/portrait2.png"
               alt="Shaurya Patel"
               width={558}
               height={447}
@@ -78,27 +90,7 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* <div className={styles.cards}>
-          <div className={styles.card} data-anim="hero-card-14" data-preload="hero-card">
-            <div className={styles.statValue} data-anim="hero-stat-14">
-              14
-            </div>
-            <div className={styles.statLabel}>Years Old</div>
-          </div>
-          <div className={styles.card} data-anim="hero-card-gold" data-preload="hero-card">
-            <div className={styles.statValue} data-anim="hero-stat-gold">
-              GOLD
-            </div>
-            <div className={styles.statLabel}>IRIS National Fair 2025–26</div>
-          </div>
-          <div className={`${styles.card} ${styles.traits}`} data-preload="hero-card">
-            {TRAITS.map((trait) => (
-              <span key={trait} className={styles.trait}>
-                {trait}
-              </span>
-            ))}
-          </div>
-        </div> */}
+        
       </div>
     </section>
   );

@@ -1,6 +1,24 @@
 .trail {
   position: absolute;
-  inset: 0;
+  overflow: hidden;
   pointer-events: none;
   z-index: 1;
+}
+
+.trailImage {
+  position: absolute;
+  width: 200px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  will-change: opacity;
+}
+
+@media (max-width: 767px) {
+  .trail {
+    display: none;
+  }
 }

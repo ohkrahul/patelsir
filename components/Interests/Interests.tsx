@@ -8,9 +8,13 @@ export default function Interests() {
       <div className={styles.header}>
         <span className="eyebrow">CURRENT INTERESTS</span>
         <h2 className={styles.heading}>
-          WHERE CURIOSITY
+          <span className={styles.headingLine} data-anim="interests-heading-line">
+            WHERE CURIOSITY
+          </span>
           <br />
-          IS LEADING.
+          <span className={styles.headingLine} data-anim="interests-heading-line">
+            IS LEADING.
+          </span>
         </h2>
         <p className={styles.intro}>
           These are not fixed career labels. They&apos;re simply the areas

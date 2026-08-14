@@ -15,7 +15,7 @@ export default function DesktopSidebar() {
     <nav className={styles.sidebar} data-anim="sidebar-root" aria-label="Primary">
       <div className={styles.sidebarInner} data-anim="sidebar-scale">
         <div className={`${styles.panel} ${styles.logo}`} data-anim="sidebar-panel">
-          <span data-ghost="hero-wordmark">PATEL</span>
+          <span data-ghost="hero-wordmark">SHAURYA</span>
         </div>
 
         <div

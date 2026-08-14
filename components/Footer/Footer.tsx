@@ -1,12 +1,19 @@
+"use client";
+
+import { useRef } from "react";
 import FAQ from "./FAQ";
 import ImageTrail from "./ImageTrail";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
+  const wordmarkRef = useRef<HTMLHeadingElement>(null);
+
   return (
     <footer className={styles.footer}>
-      <ImageTrail />
-      <h2 className={styles.wordmark}>PATEL</h2>
+      <ImageTrail targetRef={wordmarkRef} />
+      <h2 ref={wordmarkRef} className={styles.wordmark}>
+        PATEL
+      </h2>
       <div className={styles.copyRow}>
         <p className={styles.copy}>
           14 YEARS IN.

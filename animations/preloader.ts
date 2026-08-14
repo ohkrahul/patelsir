@@ -1,6 +1,6 @@
 import gsap from "gsap";
 
-const WORDMARK = '[data-anim="hero-wordmark"]';
+const WORDMARK = '[data-anim="hero-wordmark"], [data-anim="hero-wordmark-secondary"]';
 const PORTRAIT = '[data-anim="hero-portrait"]';
 const HEADLINE = '[data-preload="headline-line"]';
 const NAV = '[data-preload="hero-nav"]';

@@ -52,7 +52,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 48%;
+    top: 40%;
     padding: 0 2.5em;
     /* Above heroMorph's highest z-index (45) — a lower value here would
        cap the fixed nav links' own z-index at this stacking context's
@@ -72,7 +72,7 @@
 @media (min-width: 768px) {
   .navList {
     gap: 1em;
-    font-size: 1.15em;
+    font-size: 0.8em;
   }
 }
 
@@ -105,25 +105,82 @@
   }
 }
 
-.wordmark {
-  font-size: clamp(1.8em, 11vw, 4.7em);
+.heroWordmark {
+  position: relative;
+  /* .composition is a flex column with align-items:center on mobile, which
+     doesn't stretch children to the cross-axis width by default — without
+     this, the container shrink-wraps to its own content and the fit hook
+     ends up measuring that shrink-wrapped width instead of the actual
+     available space. */
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+}
+
+.heroWordmarkInner {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.wordmarkShaurya {
+  display: block;
+  margin: 0;
   font-weight: 900;
   letter-spacing: -0.02em;
   color: var(--yellow);
-  text-align: center;
+  /* Pre-fit fallback for the instant before useAutoFitWordmark's layout
+     effect runs — it's immediately overridden by an inline font-size once
+     the real text width is measured, so this only ever shows as a flash
+     of unstyled content on a JS-disabled request. */
+  font-size: clamp(2.2em, 13vw, 5.4em);
+}
+
+.wordmark {
+  position: absolute;
+  /* top (not bottom) on purpose: heroMorph.ts promotes this element to
+     position:fixed with an explicit inline `top` the instant it boots,
+     even at rest. A `bottom` offset left active alongside that computed
+     `top` — with no explicit height — makes the browser stretch the box
+     to satisfy both instead of sizing to its own content. */
+  top: 100%;
+  right: 0;
+  margin-top: 0.3em;
+  font-size: clamp(12px, 1.2vw, 20px);
+  line-height: 1;
+  font-weight: 700;
+  color: var(--black);
+  white-space: nowrap;
 }
 
 @media (min-width: 768px) {
-  .wordmark {
+  .heroWordmark {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    font-size: clamp(7em, 28vw, 26em);
-    line-height: 0.85;
+    /* left+right, not width:100% from the base rule — with both an
+       explicit width and left+right offsets set, the box would be
+       over-constrained and the browser drops `right`, overflowing past
+       the intended edge margin. */
+    width: auto;
+    top: 30px;
+    left: 20px;
+    right: 20px;
     text-align: left;
-    padding-left: 0.05em;
-    z-index: 1;
+  }
+
+  .wordmarkShaurya {
+    white-space: nowrap;
+    line-height: 0.78;
+    /* -0.13em packed the letters into each other and let the last glyph's
+       ink overhang past its own measured layout box (scrollWidth reflects
+       advance widths, not visual ink extent) — pushing the fit past the
+       right edge. Back to a spacing that still reads tight/display-like
+       without the glyphs touching. */
+    letter-spacing: -0.02em;
+    font-size: clamp(4.5em, 15vw, 14em);
+  }
+
+  .wordmark {
+    margin-top: 20px;
   }
 }
 

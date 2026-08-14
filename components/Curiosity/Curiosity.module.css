@@ -1,12 +1,48 @@
 .curiosity {
   padding: 5em 0;
+  text-align: center;
 }
 
 .heading {
   font-size: clamp(2em, 12vw, 6.475em);
   margin-top: 0.4em;
-  margin-bottom: 1em;
+  /* margin resolves against this element's OWN font-size, which reaches
+     ~147px at large viewports — 1em there was a ~147px gap, way more
+     than intended for the space before the statement paragraph. */
+  margin-bottom: 0.25em;
   letter-spacing: -0.01em;
+}
+
+/* Water-fill: the letters are clipped to a repeating wavy-topped SVG tile
+   instead of a solid color, so only the "wet" (below the wave line) part
+   of each glyph is filled — animating the tile horizontally makes the
+   waterline read as continuously flowing. */
+.waterWord {
+  display: inline-block;
+  color: transparent;
+  /* Outline stays around the FULL letterform (independent of the fill),
+     so the whole word stays legible even where the wave hasn't "filled"
+     it yet — the fill/wave moves only inside this outline. */
+  -webkit-text-stroke: 1.5px var(--black);
+  text-stroke: 1.5px var(--black);
+  background-repeat: repeat-x;
+  background-size: 1.4em 100%;
+  /* base64, not a raw-encoded data URI — unencoded quotes/spaces in an
+     inline SVG url() can parse inconsistently across browsers; base64
+     removes the ambiguity entirely. */
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNDAgMTIwJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSdub25lJz48cGF0aCBkPSdNMCw1MEMyMCwzOCw0MCw2Miw2MCw1MEM4MCwzOCwxMDAsNjIsMTIwLDUwQzE0MCwzOCwxNjAsNjIsMTgwLDUwQzIwMCwzOCwyMjAsNjIsMjQwLDUwTDI0MCwxMjBMMCwxMjBaJyBmaWxsPScjMUU5MEZGJy8+PC9zdmc+");
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: curiosityWaterFlow 2.4s linear infinite;
+}
+
+@keyframes curiosityWaterFlow {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: 1.4em;
+  }
 }
 
 .statement {
@@ -14,6 +50,7 @@
   font-size: clamp(1.1em, 5vw, 1.8em);
   line-height: 1.35;
   max-width: 900px;
+  margin: 0 auto;
 }
 
 .chip {

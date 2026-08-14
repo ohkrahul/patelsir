@@ -13,6 +13,10 @@
   margin-bottom: 0.6em;
 }
 
+.headingLine {
+  display: inline-block;
+}
+
 .intro {
   font-size: 1.15em;
   line-height: 1.6;

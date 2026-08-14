@@ -4,8 +4,12 @@
 }
 
 .wordmark {
-  font-size: clamp(2em, 14vw, 6.475em);
-  line-height: 0.9;
+  position: relative;
+  z-index: 2;
+  font-size: clamp(3em, 21vw, 19em);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
   text-align: center;
   color: var(--black);
 }

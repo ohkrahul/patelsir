@@ -90,7 +90,14 @@ export function createHeroMorph(metrics: Metrics): HeroMorphHandle | null {
   // pinned means these backgrounds just sit there, visible, long after
   // their content has flown off to the sidebar. Fade them out as the
   // sidebar chrome fades in, so nothing is left ghosted over Journey.
-  const outgoingCards = Array.from(document.querySelectorAll<HTMLElement>('[data-preload="hero-card"]'));
+  // The giant SHAURYA wordmark rides along too — unlike PATEL (bound
+  // above, morphs into the sidebar logo) it has nowhere to morph to, so
+  // it just fades out here instead of being left floating over Journey.
+  const outgoingCards = Array.from(
+    document.querySelectorAll<HTMLElement>(
+      '[data-preload="hero-card"], [data-anim="hero-wordmark-secondary"]'
+    )
+  );
 
   // Write pass: hide the ghost anchors (they only ever exist to be
   // measured), hide the sidebar chrome, and promote the real hero

@@ -9,6 +9,8 @@ import { createSidebarScale } from "@/animations/sidebar";
 import { createThemeSwitcher } from "@/animations/themeSwitcher";
 import { createJourneyAnimations } from "@/animations/journey";
 import { createExplorationsAnimations } from "@/animations/explorations";
+import { createCuriosityAnimations } from "@/animations/curiosity";
+import { createInterestsAnimations } from "@/animations/interests";
 import { createScrollSpy } from "@/animations/scrollSpy";
 import { playPreloader, type PreloaderHandle } from "@/animations/preloader";
 import { MOTION, isDesktopMotionActive, prefersReducedMotion } from "@/animations/config";
@@ -24,6 +26,8 @@ export function useAnimationEngine() {
     let desktopHandles: Handle[] = [];
     let journeyHandle: Handle | null = null;
     let explorationsHandle: Handle | null = null;
+    let curiosityHandle: Handle | null = null;
+    let interestsHandle: Handle | null = null;
     let scrollSpyHandle: Handle | null = null;
     let preloaderHandle: PreloaderHandle | null = null;
 
@@ -82,6 +86,8 @@ export function useAnimationEngine() {
       explorationsHandle = createExplorationsAnimations();
       setupDesktopMotion();
       journeyHandle = createJourneyAnimations();
+      curiosityHandle = createCuriosityAnimations();
+      interestsHandle = createInterestsAnimations();
       scrollSpyHandle = createScrollSpy();
       ScrollTrigger.refresh();
     }
@@ -109,6 +115,8 @@ export function useAnimationEngine() {
       teardownDesktopMotion();
       journeyHandle?.destroy();
       explorationsHandle?.destroy();
+      curiosityHandle?.destroy();
+      interestsHandle?.destroy();
       scrollSpyHandle?.destroy();
       lenisEngine.destroy();
     };
