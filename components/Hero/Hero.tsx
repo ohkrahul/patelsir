@@ -65,7 +65,7 @@ export default function Hero() {
         </div>
 
         <div className={styles.statementRow}>
-          <p className={styles.sideCopy}>
+          <p className={styles.sideCopy} data-preload="hero-card">
             14 YEARS OLD.
             <br />
             STILL EXPLORING.
@@ -74,12 +74,12 @@ export default function Hero() {
             <h2 data-preload="headline-line">CURIOUS BY NATURE.</h2>
             <h2 data-preload="headline-line">BUILDING BY CHOICE.</h2>
           </div>
-          <p className={styles.sideCopy}>
+          <p className={styles.sideCopy} data-preload="hero-card">
             Exploring science, AI, healthcare, research and music.
           </p>
         </div>
 
-        <div className={styles.cards}>
+        {/* <div className={styles.cards}>
           <div className={styles.card} data-anim="hero-card-14" data-preload="hero-card">
             <div className={styles.statValue} data-anim="hero-stat-14">
               14
@@ -99,7 +99,7 @@ export default function Hero() {
               </span>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
