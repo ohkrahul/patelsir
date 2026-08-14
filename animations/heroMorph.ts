@@ -23,7 +23,6 @@ type MeasuredBinding = BindingDef & {
 const BINDING_DEFS: BindingDef[] = [
   { id: "hero-home", range: [0.0, 0.4] },
   { id: "hero-about", range: [0.03, 0.43] },
-  { id: "hero-earlydetect", range: [0.06, 0.46] },
   { id: "hero-explorations", range: [0.09, 0.49] },
   { id: "hero-interests", range: [0.12, 0.52] },
   { id: "hero-voices", range: [0.15, 0.55] },

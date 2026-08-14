@@ -12,7 +12,10 @@ type Props = {
 export default function JourneyCard({ card, index, total, expanded, onToggle }: Props) {
   return (
     <div className={styles.row} data-anim="journey-card">
-      <article className={`${styles.card} ${expanded ? styles.expanded : ""}`}>
+      <article
+        className={`${styles.card} ${expanded ? styles.expanded : ""}`}
+        data-anim="journey-card-box"
+      >
         {card.small && <span className={styles.small}>{card.small}</span>}
         {card.tag && <span className={styles.tag}>{card.tag}</span>}
         <h3 className={styles.title}>{card.title}</h3>

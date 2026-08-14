@@ -8,6 +8,7 @@ import { createHeroMorph } from "@/animations/heroMorph";
 import { createSidebarScale } from "@/animations/sidebar";
 import { createThemeSwitcher } from "@/animations/themeSwitcher";
 import { createJourneyAnimations } from "@/animations/journey";
+import { createScrollSpy } from "@/animations/scrollSpy";
 import { playPreloader, type PreloaderHandle } from "@/animations/preloader";
 import { MOTION, isDesktopMotionActive, prefersReducedMotion } from "@/animations/config";
 
@@ -21,6 +22,7 @@ export function useAnimationEngine() {
     const lenisEngine = createLenisEngine();
     let desktopHandles: Handle[] = [];
     let journeyHandle: Handle | null = null;
+    let scrollSpyHandle: Handle | null = null;
     let preloaderHandle: PreloaderHandle | null = null;
 
     function teardownDesktopMotion() {
@@ -39,10 +41,14 @@ export function useAnimationEngine() {
       const metrics = computeMetrics();
       if (!metrics) return;
 
-      const morph = createHeroMorph(metrics);
+      // Sidebar scale must be computed and applied before heroMorph
+      // measures the ghost targets' positions — otherwise it caches
+      // where they sat pre-scale, and every traveling hero element
+      // lands at the wrong (unscaled) spot once the sidebar shrinks.
       const sidebarScale = createSidebarScale();
+      const morph = createHeroMorph(metrics);
       const theme = createThemeSwitcher(metrics);
-      desktopHandles = [morph, sidebarScale, theme].filter((h): h is Handle => Boolean(h));
+      desktopHandles = [sidebarScale, morph, theme].filter((h): h is Handle => Boolean(h));
     }
 
     async function boot() {
@@ -69,6 +75,7 @@ export function useAnimationEngine() {
 
       setupDesktopMotion();
       journeyHandle = createJourneyAnimations();
+      scrollSpyHandle = createScrollSpy();
       ScrollTrigger.refresh();
     }
 
@@ -91,6 +98,7 @@ export function useAnimationEngine() {
       preloaderHandle?.cancel();
       teardownDesktopMotion();
       journeyHandle?.destroy();
+      scrollSpyHandle?.destroy();
       lenisEngine.destroy();
     };
   }, []);

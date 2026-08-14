@@ -28,6 +28,15 @@
     overflow: hidden;
     display: block;
     padding: 0;
+    /* position: sticky unconditionally creates a stacking context, even
+       with no z-index set (unlike relative/absolute, which only do so
+       once z-index is non-auto). Left at the default level (0), the
+       whole sidebar subtree (z-index: 40) paints above the whole hero
+       subtree regardless of what z-index heroMorph gives the individual
+       traveling nav links/wordmark inside it — this has to clear that,
+       not just match it, so the internal 40-50 hierarchy actually means
+       something once compared against the sidebar from outside. */
+    z-index: 41;
   }
 }
 

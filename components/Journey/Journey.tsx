@@ -39,10 +39,6 @@ export default function Journey() {
         }}
       >
         <JourneyPath />
-        <div
-          className={`${styles.scrim} ${expandedId ? styles.scrimActive : ""}`}
-          aria-hidden="true"
-        />
         {journeyCards.map((card, index) => (
           <JourneyCard
             key={card.id}

@@ -6,7 +6,6 @@ import styles from "./MobileNav.module.css";
 const NAV_ITEMS = [
   { label: "HOME", href: "#home" },
   { label: "ABOUT", href: "#about" },
-  { label: "EARLYDETECT", href: "#earlydetect" },
   { label: "EXPLORATIONS", href: "#explorations" },
   { label: "INTERESTS", href: "#interests" },
   { label: "VOICES", href: "#voices" },

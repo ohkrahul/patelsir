@@ -4,7 +4,6 @@ import styles from "./Hero.module.css";
 const LEFT_NAV = [
   { label: "HOME", href: "#home" },
   { label: "ABOUT", href: "#about" },
-  { label: "EARLYDETECT", href: "#earlydetect" },
 ];
 
 const RIGHT_NAV = [

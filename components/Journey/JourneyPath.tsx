@@ -1,16 +1,23 @@
 import styles from "./JourneyPath.module.css";
 
 const POINT_COUNT = 8;
-const VIEW_HEIGHT = 800;
+// The SVG viewBox is a plain 100x100 square (preserveAspectRatio="none"
+// stretches it to fit), so every coordinate here already doubles as a
+// percentage of the wrap's width/height — no separate conversion needed
+// when the animation layer re-measures these points against real card
+// positions.
+const VIEW_SIZE = 100;
 
 const points = Array.from({ length: POINT_COUNT }, (_, i) => ({
-  x: i % 2 === 0 ? 35 : 65,
-  y: ((i + 0.5) / POINT_COUNT) * VIEW_HEIGHT,
+  // Row i is actually :nth-child(i+2) inside .track (this wrap div takes
+  // slot 1), so odd i is the left-aligned row per Journey.module.css.
+  x: i % 2 === 1 ? 35 : 65,
+  y: ((i + 0.5) / POINT_COUNT) * VIEW_SIZE,
 }));
 
 // Catmull-Rom to cubic-bezier, so the line runs as one smooth curve
 // through the milestones instead of a sharp zigzag.
-function smoothPath(pts: { x: number; y: number }[]): string {
+export function smoothPath(pts: { x: number; y: number }[]): string {
   if (pts.length < 2) return "";
   let d = `M${pts[0].x},${pts[0].y}`;
   for (let i = 0; i < pts.length - 1; i++) {
@@ -31,10 +38,10 @@ const pathData = smoothPath(points);
 
 export default function JourneyPath() {
   return (
-    <div className={styles.wrap} aria-hidden="true">
+    <div className={styles.wrap} data-anim="journey-path-wrap" aria-hidden="true">
       <svg
         className={styles.line}
-        viewBox={`0 0 100 ${VIEW_HEIGHT}`}
+        viewBox={`0 0 ${VIEW_SIZE} ${VIEW_SIZE}`}
         preserveAspectRatio="none"
       >
         <path
@@ -53,7 +60,7 @@ export default function JourneyPath() {
           key={i}
           data-anim="journey-path-dot"
           className={styles.dot}
-          style={{ left: `${p.x}%`, top: `${(p.y / VIEW_HEIGHT) * 100}%` }}
+          style={{ left: `${p.x}%`, top: `${p.y}%` }}
         />
       ))}
     </div>

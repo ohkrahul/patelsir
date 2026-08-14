@@ -2,6 +2,13 @@
   position: relative;
   padding: 5em 0;
   background: var(--sand);
+  /* .heroSticky needs z-index: 41 so the sidebar (z-index: 40) doesn't
+     win every hit-test over hero's traveling nav links/wordmark — but
+     that raises hero's WHOLE subtree above anything at the default
+     stacking level, including Journey, which is supposed to slide up
+     and visually cover the still-pinned hero as the page scrolls.
+     Needs its own z-index above heroSticky's to restore that. */
+  z-index: 42;
 }
 
 @media (min-width: 768px) {
@@ -33,15 +40,3 @@
   gap: 2.5em;
 }
 
-.scrim {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0);
-  pointer-events: none;
-  transition: background 0.4s ease;
-}
-
-.scrimActive {
-  background: rgba(0, 0, 0, 0.15);
-}

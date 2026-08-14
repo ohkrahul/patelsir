@@ -4,9 +4,7 @@
 
 @media (min-width: 768px) {
   .sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+    display: block;
     position: fixed;
     left: var(--sidebar-offset);
     top: 18px;
@@ -15,6 +13,17 @@
     z-index: 40;
     overflow: hidden;
   }
+}
+
+/* animations/sidebar.ts scales THIS, not .sidebar — putting `transform`
+   and .sidebar's `overflow: hidden` on the same element makes Chromium
+   fail to composite the panels' backdrop-filter correctly past a point
+   in the scaled box, silently dropping the glass background under the
+   lower nav links (their text still renders fine, just not the blur). */
+.sidebarInner {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 /* heroMorph.ts hides this chrome via inline style once it initializes,
@@ -48,7 +57,7 @@
 
 .logo {
   font-family: var(--font-display);
-  font-size: 1.4em;
+  font-size: 1.9em;
   font-weight: 800;
   color: var(--yellow);
   -webkit-text-stroke: 1px var(--black);
@@ -86,6 +95,10 @@
   font-family: var(--font-display);
   font-size: 1.6em;
   font-weight: 800;
+}
+
+.gold {
+  color: var(--gold);
 }
 
 .statLabel {
