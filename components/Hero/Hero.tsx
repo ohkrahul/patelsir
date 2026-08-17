@@ -70,7 +70,7 @@ export default function Hero() {
           </div>
           <div className={styles.portraitWrap} data-anim="hero-portrait-wrap">
             <img
-              src="/shaurya/portrait2.png"
+              src="/shaurya/portrait.png"
               alt="Shaurya Patel"
               width={558}
               height={447}
