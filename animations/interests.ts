@@ -102,8 +102,8 @@ export function createInterestsAnimations(): InterestsHandle | null {
   // card 1 reveals, then continued scrolling reveals card 2, then card 3,
   // a deliberate step-by-step progression through the section rather than
   // all three cross-fading into view within one short scroll motion.
-  const windowWidth = 1 / cards.length;
-  const starts = cards.map((_, i) => i * windowWidth);
+  const windowWidth = 0.35;
+  const starts = cards.map((_, i) => i * 0.18);
 
   function applyReveal(progress: number) {
     cards.forEach((card, i) => {
@@ -135,11 +135,11 @@ export function createInterestsAnimations(): InterestsHandle | null {
       // needs to be wide enough that each card's own third of the range
       // is a deliberate scroll step, not a instant blur through all three.
       start: "top 80%",
-      end: "bottom 30%",
+      end: "top 20%",
       // Eases the rest of the way to wherever the current scroll position
       // points over ~0.35s after scrolling stops, instead of only moving
       // while the wheel itself is moving and freezing the instant it isn't.
-      scrub: 0.35,
+      scrub: 0.3,
     },
   });
 
