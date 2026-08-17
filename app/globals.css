@@ -47,7 +47,8 @@ body {
 body {
   background: var(--sand);
   color: var(--black);
-  overflow: clip;
+  overflow-x: clip;
+  overflow-y: visible;
   line-height: 1.6;
   font-family: var(--font-body);
   font-size: clamp(0.75rem, 1.18vw, 1.5rem);
