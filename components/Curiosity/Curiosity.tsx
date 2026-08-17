@@ -2,7 +2,7 @@ import styles from "./Curiosity.module.css";
 
 const CHIPS = ["AI", "HEALTHCARE", "LIFE SCIENCES", "RESEARCH", "MUSIC"];
 const STATEMENT =
-  "I'm interested in exploring the world beyond textbooks and classrooms through competitions, research, conversations, new experiences and following a question far enough to see where it leads.";
+  "Some of my most valuable learning has happened outside a classroom. Competitions have taught me to present and defend an idea, working with teams has taught me to listen, and music has reminded me that learning doesn't always need a measurable outcome.";
 
 export default function Curiosity() {
   const words = STATEMENT.split(" ");

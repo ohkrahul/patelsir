@@ -18,8 +18,8 @@ export default function Interests() {
             </span>
           </h2>
           <p className={styles.intro}>
-            I don&apos;t want to define myself by one career or one subject at 14.
-            These are the questions and interests I keep returning to right now.
+          I&apos;m interested in a lot of things, and I don&apos;t think I need to
+          choose just one yet. These are the questions I keep returning to.
           </p>
         </div>
 

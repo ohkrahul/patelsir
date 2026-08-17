@@ -23,6 +23,32 @@
   font-size: clamp(1.2em, 6vw, 2em);
 }
 
+.manifesto {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45em;
+  max-width: 900px;
+  margin: 1.5em auto 0;
+}
+
+.manifesto span {
+  padding: 0.35em 0.7em;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--black);
+  font-size: clamp(0.75em, 1.2vw, 1em);
+  font-weight: 800;
+}
+
+.finalLine {
+  margin-top: 1.25em;
+  font-family: var(--font-caveat), cursive;
+  font-size: clamp(2em, 5vw, 4em);
+  font-weight: 700;
+  line-height: 1;
+}
+
 .tagline {
   margin-top: 0.5em;
   font-size: 1em;

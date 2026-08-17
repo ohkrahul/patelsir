@@ -6,7 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Shaurya Patel",
   description:
-    "Shaurya Patel — Class X student, researcher, innovator and guitarist from Ahmedabad, exploring life sciences, healthcare and artificial intelligence.",
+    "I'm Shaurya Patel, a Class X student, researcher and guitarist from Ahmedabad, exploring life sciences, healthcare, technology and scientific innovation.",
 };
 
 const bootScript = `

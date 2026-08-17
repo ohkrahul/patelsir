@@ -32,6 +32,148 @@
   margin-bottom: 3em;
 }
 
+.homeIntro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: clamp(2em, 6vw, 6em);
+  margin-bottom: clamp(5em, 10vw, 9em);
+  padding: clamp(2em, 5vw, 5em) 0;
+  border-top: 1px solid rgb(0 0 0 / 0.18);
+  border-bottom: 1px solid rgb(0 0 0 / 0.18);
+}
+
+.homeIntroLead {
+  position: relative;
+  align-self: center;
+}
+
+.homeIntroLead::before {
+  content: "";
+  position: absolute;
+  top: -1.2em;
+  left: 0;
+  width: 3.5em;
+  height: 0.35em;
+  border-radius: 999px;
+  background: var(--yellow);
+}
+
+.homeIntroHeading {
+  margin-top: 0.35em;
+  font-size: clamp(2.5em, 5vw, 5.3em);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+}
+
+.homeIntroLine,
+.homeIntroCursive,
+.homeIntroAnswer {
+  display: block;
+}
+
+.homeIntroCursive {
+  position: relative;
+  width: fit-content;
+  margin: -0.05em 0 0.08em;
+  color: var(--yellow);
+  font-family: var(--font-caveat), cursive;
+  font-size: 1.28em;
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  text-shadow: 2px 3px 0 rgb(0 0 0 / 0.14);
+  animation: typeQuestions 3.8s steps(10, end) infinite;
+}
+
+.homeIntroCursive::after {
+  content: "";
+  position: absolute;
+  top: 0.08em;
+  right: -0.08em;
+  width: 0.035em;
+  height: 0.8em;
+  background: currentColor;
+  animation: typingCursor 0.55s step-end infinite;
+}
+
+@keyframes typeQuestions {
+  0%,
+  8% {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  38%,
+  68% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  92%,
+  100% {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+@keyframes typingCursor {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.homeIntroAnswer {
+  max-width: 11em;
+  font-size: 0.58em;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.homeIntroCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+  font-size: 1.05em;
+  line-height: 1.55;
+}
+
+.homeIntroCopy p {
+  padding-left: 1em;
+  border-left: 2px solid rgb(0 0 0 / 0.16);
+}
+
+.homeIntroCopy p:first-child {
+  border-left-color: var(--yellow);
+  font-size: 1.08em;
+}
+
+.textHighlight {
+  padding: 0 0.08em;
+  color: inherit;
+  background: linear-gradient(
+    to bottom,
+    transparent 48%,
+    rgb(255 255 35 / 0.62) 48%,
+    rgb(255 255 35 / 0.62) 90%,
+    transparent 90%
+  );
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.homeIntroLink {
+  align-self: flex-start;
+  margin-top: 0.5em;
+  padding-bottom: 0.15em;
+  border-bottom: 2px solid var(--black);
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
 .heading {
   font-size: clamp(1.6em, 8vw, 4em);
   margin-top: 0.4em;
@@ -43,6 +185,85 @@
   line-height: 1.6;
 }
 
+.aboutDetails {
+  max-width: 760px;
+  margin-bottom: clamp(5em, 9vw, 8em);
+}
+
+.aboutNarrative {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35em;
+  font-size: 1.08em;
+  line-height: 1.65;
+}
+
+.musicNote {
+  margin-top: 0.6em;
+  padding: 1.4em;
+  border: 1px solid rgb(0 0 0 / 0.18);
+  border-radius: 0.7em;
+  background: var(--card);
+}
+
+.musicNote span {
+  display: block;
+  margin-bottom: 0.35em;
+  color: var(--gold);
+  font-family: var(--font-caveat), cursive;
+  font-size: 1.65em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.outsideClassroom {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(3em, 7vw, 7em);
+  margin-bottom: clamp(6em, 11vw, 10em);
+  padding: clamp(2em, 4vw, 4em);
+  border-radius: 0.8em;
+  background: var(--card);
+}
+
+.outsideHeading h3 {
+  margin: 0.45em 0 0.6em;
+  font-size: clamp(2.2em, 4.6vw, 4.6em);
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+}
+
+.outsideHeading p {
+  max-width: 27em;
+  line-height: 1.55;
+}
+
+.outsideLessons {
+  list-style: none;
+  border-top: 1px solid rgb(0 0 0 / 0.2);
+}
+
+.outsideLessons li {
+  display: grid;
+  grid-template-columns: 3em 1fr;
+  gap: 1em;
+  align-items: baseline;
+  padding: 1.35em 0;
+  border-bottom: 1px solid rgb(0 0 0 / 0.2);
+}
+
+.outsideLessons span {
+  color: var(--gold);
+  font-size: 0.75em;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.outsideLessons p {
+  font-size: clamp(1em, 1.55vw, 1.3em);
+  line-height: 1.45;
+}
+
 .track {
   position: relative;
   display: flex;
@@ -51,8 +272,62 @@
 }
 
 @media (max-width: 767px) {
+  .homeIntro {
+    grid-template-columns: 1fr;
+    gap: 1.5em;
+    margin-bottom: 4em;
+    padding: 2.25em 0;
+  }
+
+  .homeIntroHeading {
+    font-size: clamp(2em, 9vw, 3.2em);
+  }
+
+  .homeIntroLead::before {
+    top: -0.8em;
+  }
+
+  .homeIntroAnswer {
+    max-width: 13em;
+    font-size: 0.62em;
+  }
+
+  .homeIntroCopy {
+    font-size: 1em;
+  }
+
+  .aboutDetails {
+    margin-bottom: 4em;
+  }
+
+  .outsideClassroom {
+    grid-template-columns: 1fr;
+    gap: 2em;
+    margin-bottom: 5em;
+    padding: 1.5em;
+  }
+
+  .outsideHeading h3 {
+    font-size: clamp(2.4em, 12vw, 3.5em);
+  }
+
+  .outsideLessons li {
+    grid-template-columns: 2em 1fr;
+  }
+
   .track {
     padding-left: 2.25em;
     gap: 2em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homeIntroCursive {
+    clip-path: none;
+  }
+
+  .homeIntroCursive,
+  .homeIntroCursive::after {
+    animation: none;
   }
 }

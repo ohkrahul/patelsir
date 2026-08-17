@@ -18,8 +18,18 @@ export default function Footer() {
         <p className={styles.copy}>
           I&apos;M 14.
           <br />
-          I&apos;M STILL ASKING QUESTIONS.
+          THERE IS A LOT I DON&apos;T KNOW YET.
+          <br />
+          AND I DON&apos;T THINK I NEED MY ENTIRE FUTURE FIGURED OUT.
         </p>
+        <p className={styles.manifesto}>
+          <span>KEEP ASKING QUESTIONS.</span>
+          <span>KEEP LEARNING.</span>
+          <span>KEEP EXPERIMENTING.</span>
+          <span>KEEP PLAYING.</span>
+          <span>KEEP BUILDING.</span>
+        </p>
+        <p className={styles.finalLine}>AND SEE WHERE IT TAKES ME.</p>
         <p className={styles.tagline}>Ahmedabad → wherever curiosity leads next.</p>
       </div>
       <FAQ />

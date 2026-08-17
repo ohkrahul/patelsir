@@ -2,7 +2,7 @@ import { explorationCards } from "@/data/explorations";
 import ExplorationCard from "./ExplorationCard";
 import styles from "./Explorations.module.css";
 
-const HEADING_LINES = ["QUESTIONS", "TURNED INTO", "RESEARCH."];
+const HEADING_LINES = ["A QUESTION", "TURNED INTO", "RESEARCH."];
 
 export default function Explorations() {
   return (
@@ -22,9 +22,9 @@ export default function Explorations() {
             ))}
           </h2>
           <p className={styles.copy} data-anim="explorations-copy">
-            Research is not about finding an answer quickly. It is about asking
-            the right question, finding evidence, checking assumptions and
-            being willing to change your thinking.
+            The first idea isn&apos;t always the best one. I&apos;m learning to question
+            my assumptions, look for evidence, listen to different expertise
+            and let the project change as I learn more.
           </p>
         </div>
 

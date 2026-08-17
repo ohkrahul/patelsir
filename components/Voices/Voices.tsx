@@ -10,14 +10,14 @@ export default function Voices() {
     <section id="voices" className={styles.voices}>
       <div className={styles.sticky} data-anim="voices-sticky">
         <div className={styles.header}>
-          <span className="eyebrow" data-anim="voices-label">MEDIA &amp; MILESTONES</span>
+          <span className="eyebrow" data-anim="voices-label">MEDIA &amp; MOMENTS</span>
           <h2 className={styles.heading}>
             <span className={styles.headingMask}>
-              <span className={styles.headingLine} data-anim="voices-heading-line">SHAURYA IN</span>
+              <span className={styles.headingLine} data-anim="voices-heading-line">MY JOURNEY</span>
             </span>
             <br />
             <span className={styles.headingMask}>
-              <span className={styles.headingLine} data-anim="voices-heading-line">THE NEWS.</span>
+              <span className={styles.headingLine} data-anim="voices-heading-line">IN THE NEWS.</span>
             </span>
           </h2>
         </div>

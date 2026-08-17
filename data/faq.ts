@@ -1,48 +1,14 @@
-export type FAQItem = {
-  id: string;
-  question: string;
-  answer: string;
-};
+export type FAQItem = { id: string; question: string; answer: string };
 
 export const faqItems: FAQItem[] = [
-  {
-    id: "what-is-earlydetect",
-    question: "What is EarlyDetect-AI?",
-    answer: "EarlyDetect-AI is Shaurya's research project exploring a unified Metabolic Health Score that brings clinical biomarkers, lifestyle factors and diagnostic information into one interpretable metric.",
-  },
-  {
-    id: "research-question",
-    question: "What question does the project explore?",
-    answer: "It asks how metabolic health risks might be identified earlier and made easier to understand and track.",
-  },
-  {
-    id: "shaurya-role",
-    question: "What was Shaurya's role?",
-    answer: "He led the journey from defining the clinical question and focus disorders to reviewing literature, preparing outcome summaries and supporting variable selection. He also contributed to data cleaning and quality assurance with medical, biostatistics and digital-health teams.",
-  },
-  {
-    id: "conditions",
-    question: "Which health conditions are in focus?",
-    answer: "The current research focuses on type 2 diabetes, obesity, MASLD and PCOS. A preliminary oncology dimension remains exploratory while data collection continues.",
-  },
-  {
-    id: "iris",
-    question: "What did Shaurya achieve at IRIS?",
-    answer: "He won Gold at the IRIS National Fair in 2025 and again at the 2025–26 fair, making it two consecutive Gold medals.",
-  },
-  {
-    id: "isef",
-    question: "When did he represent India?",
-    answer: "After his 2025 IRIS Gold, Shaurya represented India at the Regeneron International Science and Engineering Fair 2025 in Columbus, Ohio, USA.",
-  },
-  {
-    id: "music",
-    question: "Why is music part of the website?",
-    answer: "Playing guitar gives Shaurya another way to think, create and express. Like research, it involves patience, practice, experimentation and learning from mistakes.",
-  },
-  {
-    id: "next",
-    question: "What's next?",
-    answer: "Shaurya does not want to define himself by one career or subject at 14. For now, the plan is simple: learn, try, question, build and repeat.",
-  },
+  { id: "what-is-earlydetect", question: "What is EarlyDetect-AI?", answer: "It's my research project exploring a unified Metabolic Health Score—one interpretable metric combining clinical biomarkers, lifestyle factors and diagnostic information." },
+  { id: "research-question", question: "What question did I start with?", answer: "Can we make complex health information easier to understand? I became curious about whether separate reports, measurements and indicators could be brought together." },
+  { id: "my-role", question: "What have I worked on?", answer: "I've helped define the clinical question and focus disorders, reviewed scientific literature, prepared outcome summaries, supported variable selection and contributed to data cleaning and quality assurance." },
+  { id: "conditions", question: "Which conditions does the research explore?", answer: "My current research looks at type 2 diabetes, obesity, MASLD and PCOS. A preliminary oncology dimension is also evolving as data collection progresses." },
+  { id: "research-goals", question: "What is the proposed score designed to explore?", answer: "It is designed to bring different health indicators together, stratify metabolic risk, identify which health domains contribute most to risk, track how risk changes over time and explore whether interventions could become more personalised." },
+  { id: "research-ethics", question: "How do ethics fit into the project?", answer: "Working alongside medical, biostatistics and digital-health teams has helped me understand the ethical considerations involved in working with anonymised patient data. The research remains exploratory and continues to evolve as data collection progresses." },
+  { id: "iris", question: "What did IRIS teach me?", answer: "It taught me how to present and defend an idea, explain the thinking behind my research and learn from other students working on questions of their own." },
+  { id: "isef", question: "What did representing India mean to me?", answer: "ISEF let me see how students from different parts of the world approach scientific questions—and reminded me how much there is still to learn." },
+  { id: "music", question: "Why is music part of my journey?", answer: "Playing guitar gives me a different space from research. I'm simply listening, practising, experimenting and trying to get better." },
+  { id: "next", question: "What's next?", answer: "I want to keep asking questions, learning, experimenting, playing and building—and see where it takes me." },
 ];
