@@ -18,6 +18,7 @@ export default function DesktopSidebar() {
           <span data-ghost="hero-wordmark">SHAURYA</span>
         </div>
 
+
         <div
           className={`${styles.panel} ${styles.identity}`}
           data-anim="sidebar-panel"
