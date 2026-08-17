@@ -20,11 +20,16 @@
 }
 
 .logo {
-  font-family: var(--font-display);
-  font-size: 1.2em;
-  font-weight: 800;
-  color: var(--yellow);
-  -webkit-text-stroke: 1px var(--black);
+  display: flex;
+  align-items: center;
+  width: clamp(130px, 42vw, 180px);
+  height: 46px;
+  overflow: hidden;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
 }
 
 .toggle {
@@ -102,7 +107,7 @@
   font-family: var(--font-display);
   font-size: 0.85em;
   font-weight: 600;
-  color: var(--muted);
+  color: #f8e8dc;
 }
 
 .overlayLabel {
