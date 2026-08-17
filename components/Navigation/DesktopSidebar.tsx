@@ -20,6 +20,7 @@ export default function DesktopSidebar() {
 
 
 
+
         <div
           className={`${styles.panel} ${styles.identity}`}
           data-anim="sidebar-panel"
