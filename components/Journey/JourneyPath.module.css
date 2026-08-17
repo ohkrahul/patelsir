@@ -10,7 +10,17 @@
 
 @media (max-width: 767px) {
   .wrap {
-    display: none;
+    left: 0;
+    width: 100%;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .line path {
+    stroke-width: 2px;
   }
 }
 

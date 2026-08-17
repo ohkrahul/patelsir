@@ -125,7 +125,15 @@ export function createJourneyAnimations(): JourneyHandle | null {
         // every .row — so row i is actually :nth-child(i+2), flipping the
         // parity against Journey.module.css's :nth-child(odd/even) rule.
         const leftAligned = i % 2 === 1;
-        const x = leftAligned ? r.right : r.left;
+        // Mobile cards share one column, so alternate points inside the
+        // dedicated left gutter. smoothPath turns these offsets into a soft,
+        // cursive wave without allowing the card surface to cover the line.
+        const x =
+          window.innerWidth < 768
+            ? r.left - (i % 2 === 0 ? 18 : 9)
+            : leftAligned
+              ? r.right
+              : r.left;
         const y = r.top + r.height / 2;
         return {
           x: ((x - wrapRect.left) / wrapRect.width) * 100,
@@ -151,8 +159,29 @@ export function createJourneyAnimations(): JourneyHandle | null {
   // early trigger so it is readable as soon as it enters the screen.
   if (window.innerWidth < 768) {
     gsap.set(cards, { y: "5%", opacity: 0, scale: 0.96 });
+    if (dots.length) gsap.set(dots, { scale: 0, opacity: 0 });
 
-    cards.forEach((card) => {
+    if (pathLine && pathPixelTotal > 0) {
+      pathLine.style.strokeDasharray = "";
+      pathLine.style.strokeDashoffset = "0px";
+      const pathTween = gsap.fromTo(
+        pathLine,
+        { clipPath: "inset(0 0 100% 0)" },
+        {
+          clipPath: "inset(0 0 0% 0)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: journeyEl,
+            start: "top 85%",
+            end: "bottom 90%",
+            scrub: 0.3,
+          },
+        },
+      );
+      if (pathTween.scrollTrigger) triggers.push(pathTween.scrollTrigger);
+    }
+
+    cards.forEach((card, index) => {
       const tween = gsap.to(card, {
         y: "0%",
         opacity: 1,
@@ -167,13 +196,35 @@ export function createJourneyAnimations(): JourneyHandle | null {
         },
       });
       if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
+
+      const dot = dots[index];
+      if (dot) {
+        const dotTween = gsap.to(dot, {
+          scale: 1,
+          opacity: 1,
+          duration: 0.25,
+          ease: "back.out(2)",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 95%",
+            once: true,
+          },
+        });
+        if (dotTween.scrollTrigger) triggers.push(dotTween.scrollTrigger);
+      }
     });
 
     return {
       destroy: () => {
         triggers.forEach((trigger) => trigger.kill());
-        gsap.killTweensOf(cards);
-        gsap.set(cards, { clearProps: "all" });
+        gsap.killTweensOf([...cards, ...dots]);
+        if (pathLine) {
+          gsap.killTweensOf(pathLine);
+          pathLine.style.strokeDasharray = "";
+          pathLine.style.strokeDashoffset = "";
+          gsap.set(pathLine, { clearProps: "clipPath" });
+        }
+        gsap.set([...cards, ...dots], { clearProps: "all" });
       },
     };
   }

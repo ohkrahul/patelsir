@@ -49,3 +49,10 @@
   flex-direction: column;
   gap: 2.5em;
 }
+
+@media (max-width: 767px) {
+  .track {
+    padding-left: 2.25em;
+    gap: 2em;
+  }
+}
