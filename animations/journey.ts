@@ -84,6 +84,11 @@ export function createJourneyAnimations(): JourneyHandle | null {
   // used both to trigger its reveal and as an anchor for the draw-length map.
   let scrollProgresses: number[] = [];
   let mapToArcFraction = (p: number) => p;
+  // Populated only when the path/dots rebuild below succeeds (desktop with
+  // valid rects) — each card's own position as an arc-length fraction along
+  // the curve, so its reveal can be driven off the same number the line's
+  // draw length is, instead of a separately-tuned scroll-progress window.
+  let arcFractions: number[] = [];
   // Total on-screen pixel length of the curve, for converting a 0..1 draw
   // fraction into an actual stroke-dasharray value. Computed once; see
   // uniformPixelScale for why a plain getTotalLength() isn't enough.
@@ -134,28 +139,33 @@ export function createJourneyAnimations(): JourneyHandle | null {
       });
 
       const rawTotal = pathLine.getTotalLength();
-      const arcFractions = anchors.map((a) => rawLengthNear(pathLine, a, rawTotal) / rawTotal);
+      arcFractions = anchors.map((a) => rawLengthNear(pathLine, a, rawTotal) / rawTotal);
       mapToArcFraction = buildProgressMap(scrollProgresses, arcFractions);
       pathPixelTotal = rawTotal * uniformPixelScale(pathLine);
     }
   }
 
-  // Each card fades in over a ramp ENDING exactly at its own threshold —
-  // matching the line's own draw, a pure function of self.progress with no
-  // independent timing. The ramp has to be wide, not a quick last-moment
-  // flourish: the line's tip is already visibly closing in on card i's dot
-  // well before self.progress reaches its threshold (it's continuously
-  // interpolating there from card i-1's anchor), so a narrow ramp leaves
-  // the card sitting at ~0 opacity while the line is visibly approaching
-  // it, then snaps it in during the final sliver of scroll — reading as
-  // "the line connected but the card wasn't there yet". Spanning (most of)
-  // the gap since the previous card's own threshold means the fade starts
-  // as soon as that card settles, so this one is already visible well
-  // before the line arrives.
+  // Each card's reveal is driven off the same number the line's own draw
+  // length is (arc-length fraction along the curve), not off self.progress
+  // independently — a separate, merely-tuned scroll-progress window can
+  // only ever approximate when the line visually reaches a dot, and either
+  // undershoots (card pops in before the line arrives) or overshoots (line
+  // arrives, card still invisible) depending on how curvy that stretch is.
+  // Keying reveal to arc-length instead makes t hit 1 at exactly the same
+  // instant drawnPx reaches that dot's position — no independent timing
+  // left to drift out of sync.
   const revealEase = gsap.parseEase("power2.out");
+  const hasArcSync = arcFractions.length === scrollProgresses.length && arcFractions.length > 0;
+  const arcRamps = hasArcSync
+    ? arcFractions.map((frac, i) => {
+        const prevFrac = i > 0 ? arcFractions[i - 1] : 0;
+        return Math.max(0.01, (frac - prevFrac) * 0.6);
+      })
+    : [];
+  // Mobile fallback (no path to sync to) — the old progress-window approach.
   const revealRamps = scrollProgresses.map((threshold, i) => {
     const prevThreshold = i > 0 ? scrollProgresses[i - 1] : 0;
-    return Math.max(0.02, (threshold - prevThreshold) * 0.9);
+    return Math.max(0.02, (threshold - prevThreshold) * 0.35);
   });
 
   if (pathLine) {
@@ -176,11 +186,18 @@ export function createJourneyAnimations(): JourneyHandle | null {
       end: "bottom center",
       scrub: true,
       onUpdate: (self) => {
-        const drawnPx = mapToArcFraction(self.progress) * pathPixelTotal;
+        const currentArc = mapToArcFraction(self.progress);
+        const drawnPx = currentArc * pathPixelTotal;
         pathLine.style.strokeDasharray = `${drawnPx}px, 999999px`;
         scrollProgresses.forEach((threshold, i) => {
-          const ramp = revealRamps[i];
-          const raw = gsap.utils.clamp(0, 1, (self.progress - (threshold - ramp)) / ramp);
+          let raw: number;
+          if (hasArcSync) {
+            const ramp = arcRamps[i];
+            raw = gsap.utils.clamp(0, 1, (currentArc - (arcFractions[i] - ramp)) / ramp);
+          } else {
+            const ramp = revealRamps[i];
+            raw = gsap.utils.clamp(0, 1, (self.progress - (threshold - ramp)) / ramp);
+          }
           const t = revealEase(raw);
           const dot = dots[i];
           const card = cards[i];
