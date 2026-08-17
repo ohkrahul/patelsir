@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { journeyCards } from "@/data/journey";
 import JourneyCard from "./JourneyCard";
 import JourneyPath from "./JourneyPath";
@@ -70,11 +71,21 @@ export default function Journey() {
             with different areas of expertise and be willing to change my
             thinking when the evidence tells me to.
           </p>
-          <p className={styles.musicNote}>
-            <span>And then there&apos;s music.</span>
-            When I&apos;m not researching or studying, I love playing the guitar. It
-            gives me a completely different way to think and express myself.
-          </p>
+          <div className={styles.musicNote}>
+            <Image
+              src="/footer/a.jpeg"
+              alt="Shaurya Patel with his guitar"
+              width={1200}
+              height={1600}
+              sizes="(max-width: 767px) 100vw, 220px"
+              className={styles.musicPhoto}
+            />
+            <p>
+              <span>And then there&apos;s music.</span>
+              When I&apos;m not researching or studying, I love playing the guitar.
+              It gives me a completely different way to think and express myself.
+            </p>
+          </div>
         </div>
 
       </div>

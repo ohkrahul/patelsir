@@ -1,4 +1,5 @@
 import type { ExplorationCard as ExplorationCardData } from "@/data/explorations";
+import Image from "next/image";
 import PlaceholderMedia from "@/components/shared/PlaceholderMedia";
 import styles from "./ExplorationCard.module.css";
 
@@ -12,11 +13,21 @@ export default function ExplorationCard({
   return (
     <article id={anchorId} className={styles.card} data-anim="exploration-card">
       <div className={styles.media}>
-        <PlaceholderMedia
-          label={card.title}
-          tone="dark"
-          className={styles.mediaFill}
-        />
+        {card.id === "six-strings" ? (
+          <Image
+            src="/footer/a.jpeg"
+            alt="Shaurya Patel with his guitar"
+            fill
+            sizes="(max-width: 767px) 100vw, 440px"
+            className={`${styles.mediaFill} ${styles.photoFill}`}
+          />
+        ) : (
+          <PlaceholderMedia
+            label={card.title}
+            tone="dark"
+            className={styles.mediaFill}
+          />
+        )}
         <div className={styles.mediaOverlay}>
           <span className={styles.number}>{card.number}</span>
           <div className={styles.tags}>
