@@ -57,11 +57,20 @@
 
 .logo {
   font-family: var(--font-display);
-  font-size: 1.9em;
+  /* --sidebar-width is pinned at its 200px floor across most of the
+     desktop range (roughly 768–1439px viewport width — vw only takes
+     over above that), so a vw-based size here wouldn't track the
+     sidebar's actual width at all in the common case. SHAURYA (7
+     letters) needs noticeably more room than PATEL (5) did at the old
+     1.9em, so this is just sized down to fit the 200px floor with real
+     padding to spare — which only leaves more room once the sidebar
+     itself grows past that floor. */
+  font-size: 1.3em;
   font-weight: 800;
   color: var(--yellow);
   -webkit-text-stroke: 1px var(--black);
   padding: 0.25em 1em;
+  white-space: nowrap;
 }
 
 .identity {
