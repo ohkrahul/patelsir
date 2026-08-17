@@ -10,7 +10,7 @@ export default function FutureCTA() {
         academic collaborations, research conversations or other professional
         enquiries, please get in touch through a parent or guardian.
       </p>
-      <span className={styles.button}>GUARDIAN-MANAGED EMAIL COMING SOON</span>
+      <span className={styles.button}>EMAIL COMING SOON</span>
     </section>
   );
 }
