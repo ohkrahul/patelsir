@@ -63,9 +63,9 @@ export default function Hero() {
               <h1 ref={textRef} className={styles.wordmarkShaurya} data-anim="hero-wordmark">
                 SHAURYA
               </h1>
-              {/* <span className={styles.wordmark} data-anim="hero-wordmark-secondary">
+              <span className={styles.wordmark} data-anim="hero-wordmark-secondary">
                 PATEL
-              </span> */}
+              </span>
             </div>
           </div>
           <div className={styles.portraitWrap} data-anim="hero-portrait-wrap">
