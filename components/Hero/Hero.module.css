@@ -64,9 +64,48 @@
 
 .navList {
   display: flex;
+  align-items: center;
   gap: 1.5em;
   font-size: 1.059em;
   font-weight: 600;
+}
+
+/* heroMorph.ts promotes these nav links to position:fixed the instant
+   the page boots (they're part of the sidebar FLIP migration), which
+   pulls them out of their <li>'s normal flow — sizing/aligning a
+   separator against the <li> itself (e.g. a flex child or ::after on
+   the <li>) ends up positioned against that now-hollow box instead of
+   where the link actually renders. A border on the link itself always
+   tracks the link's real visual position regardless of what heroMorph
+   does to its layout. */
+/* Every item gets a trailing separator, including each list's own last
+   item (ABOUT, FAQ) — the two <ul>s sit far apart in the horizontal hero
+   row (HOME/ABOUT on the left, EXPLORATIONS..FAQ on the right) where a
+   trailing mark just precedes empty space, but once heroMorph migrates
+   them into the vertical sidebar they read as one continuous list, and
+   leaving gaps at each list's own boundary would look inconsistent. */
+.navList li a {
+  position: relative;
+  padding-right: 1.5em;
+}
+
+.navList li a::after {
+  /* A border spans the link's full line-box height (ascender to
+     descender), taller than the actual letters — an absolutely
+     positioned, explicitly sized mark matches the text's height
+     instead. HoverText's .hoverMask is vertical-align:top and only 1em
+     tall, so the visible text sits at the TOP of the link's (taller)
+     line-box, not centered in it — centering this mark on 0.5em from
+     the top (the mask's own center), not 50% of the whole box, is what
+     actually lines it up with the letters instead of sitting low. */
+  content: "";
+  position: absolute;
+  top: 0.5em;
+  right: 0.6em;
+  width: 1.5px;
+  height: 0.7em;
+  transform: translateY(-50%);
+  background: rgb(0 0 0 / 0.4);
 }
 
 @media (min-width: 768px) {
@@ -261,6 +300,15 @@
   font-size: 1em;
   font-weight: 600;
   letter-spacing: 0.02em;
+}
+
+.cursive {
+  display: inline-block;
+  margin-right: 0.25em;
+  font-family: var(--font-caveat);
+  font-weight: 600;
+  letter-spacing: 0;
+  font-size: 1.5em;
 }
 
 @media (min-width: 768px) {

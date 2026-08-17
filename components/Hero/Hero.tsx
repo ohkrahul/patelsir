@@ -81,14 +81,11 @@ export default function Hero() {
 
         <div className={styles.statementRow}>
           <p className={styles.sideCopy} data-preload="hero-card">
-            14 YEARS OLD.
+            <span className={styles.cursive}>Curious</span> BY NATURE.
             <br />
-            STILL EXPLORING.
+            <span className={styles.cursive}>Building</span> BY CHOICE.
           </p>
-          <div className={styles.headline}>
-            <h2 data-preload="headline-line">CURIOUS BY NATURE.</h2>
-            <h2 data-preload="headline-line">BUILDING BY CHOICE.</h2>
-          </div>
+          
           <p className={styles.sideCopy} data-preload="hero-card">
             Exploring science, AI, healthcare, research and music.
           </p>

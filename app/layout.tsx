@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { archivo, switzer } from "./fonts";
+import { archivo, caveat, switzer } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${switzer.variable}`}
+      className={`${archivo.variable} ${switzer.variable} ${caveat.variable}`}
     >
       <body suppressHydrationWarning>
         {/* document.body doesn't exist yet while this runs from <head> —

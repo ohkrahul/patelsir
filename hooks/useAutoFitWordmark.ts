@@ -51,14 +51,22 @@ export function useAutoFitWordmark<
 
       // The wrapper around the fitted text normally shrink-wraps to it
       // (inline-block sized by in-flow content) so a sibling caption can
-      // hang off its corner via right:0 — but heroMorph.ts later promotes
-      // the text element to position:fixed once scrolling starts, pulling
-      // it out of flow entirely. Left alone, the wrapper would then
-      // collapse to whatever's left (the caption's own tiny width),
-      // wrecking that caption's positioning. Pinning an explicit width
-      // here keeps the wrapper's size stable regardless of what happens
-      // to the text element's positioning later.
-      if (innerRef.current) innerRef.current.style.width = `${targetWidth}px`;
+      // hang off its corner via right:0/top:100% — but heroMorph.ts
+      // promotes the text element to position:fixed the instant the page
+      // boots (even before any scrolling), pulling it out of flow
+      // entirely. Left alone, the wrapper would then collapse toward
+      // whatever's left (the caption itself, which is also
+      // position:absolute and so doesn't contribute either), wrecking
+      // the caption's positioning on BOTH axes — width first (send it
+      // off-screen sideways) and, just as easily missed, height too
+      // (collapse it to ~0 tall, so top:100% lands near the very top
+      // instead of below the fitted text). Pin both explicitly so the
+      // wrapper's box stays stable regardless of what happens to the
+      // text element's own positioning later.
+      if (innerRef.current) {
+        innerRef.current.style.width = `${targetWidth}px`;
+        innerRef.current.style.height = `${text.getBoundingClientRect().height}px`;
+      }
     }
 
     fit();

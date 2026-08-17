@@ -1,8 +1,14 @@
-import { Archivo } from "next/font/google";
+import { Archivo, Caveat } from "next/font/google";
 import localFont from "next/font/local";
 
 export const archivo = Archivo({
   variable: "--font-archivo",
+  subsets: ["latin"],
+  weight: "variable",
+});
+
+export const caveat = Caveat({
+  variable: "--font-caveat",
   subsets: ["latin"],
   weight: "variable",
 });

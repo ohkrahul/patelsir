@@ -125,9 +125,16 @@
 }
 
 .navLink {
-  font-size: 1.059em;
+  font-size: 0.85em;
   font-weight: 600;
-  padding: 0.5em 0.75em;
+  /* Right padding matches the hero nav link's own padding-right (Hero
+     .module.css) — heroMorph.ts interpolates the real hero link's width
+     toward this ghost's measured width, so if this doesn't reserve the
+     same room the hero link needs for its separator mark, the real
+     link ends up squeezed narrower than its text + separator actually
+     need once fully migrated, running text into the mark (most visible
+     on the longest label, EXPLORATIONS). */
+  padding: 0.5em 1.5em 0.5em 0.75em;
   border-radius: 0.35em;
   transition: background 0.2s ease;
 }

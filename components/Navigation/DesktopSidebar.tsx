@@ -60,7 +60,7 @@ export default function DesktopSidebar() {
         </div>
 
         <a href="#whats-next" className={styles.cta} data-anim="sidebar-cta">
-          Keep Exploring →
+          Connect With Me →
         </a>
       </div>
     </nav>
