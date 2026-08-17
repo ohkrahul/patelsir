@@ -90,6 +90,22 @@ export function useAnimationEngine() {
       interestsHandle = createInterestsAnimations();
       scrollSpyHandle = createScrollSpy();
       ScrollTrigger.refresh();
+
+      // The browser can apply a URL hash before Explorations replaces its
+      // fallback height with the measured horizontal-scroll height. That
+      // leaves the same scrollY pointing at a later section and skips every
+      // animation in between. Reconcile an initial hash only after all
+      // section measurements and ScrollTriggers are ready.
+      if (window.location.hash) {
+        const target = document.querySelector<HTMLElement>(window.location.hash);
+        if (target) {
+          lenisEngine.lenis.scrollTo(target, {
+            immediate: true,
+            offset: isDesktopMotionActive() ? 0 : -72,
+          });
+          ScrollTrigger.update();
+        }
+      }
     }
 
     boot();
