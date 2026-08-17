@@ -1,5 +1,11 @@
 .wrap {
+  position: relative;
   display: block;
+  height: calc(100svh - 72px);
+  min-height: 560px;
+  margin-inline: -1.25em;
+  overflow: hidden;
+  background: var(--sand);
 }
 
 @media (min-width: 768px) {
@@ -9,112 +15,70 @@
 }
 
 .composition {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  inset: 0;
 }
 
-.heroWordmark {
-  position: relative;
-  /* .composition is a flex column with align-items:center, which doesn't
-     stretch children to the cross-axis width by default — without this,
-     the container shrink-wraps to its own content and the fit hook ends
-     up measuring that shrink-wrapped width instead of the actual
-     available space. */
-  width: 100%;
-  text-align: center;
+.wordmarkImg {
+  position: absolute;
+  top: 0.75em;
+  left: 0.75em;
+  width: calc(100% - 1.5em);
+  height: auto;
   z-index: 1;
 }
 
-.heroWordmarkInner {
-  position: relative;
-  display: inline-block;
-  max-width: 100%;
-}
-
-.wordmarkShaurya {
-  display: block;
-  /* Without this, once useAutoFitWordmark pins an explicit (wider) width
-     on heroWordmarkInner, this block-level element stretches to fill it —
-     and the NEXT fit() call then measures that stretched box's width via
-     scrollWidth instead of the text's actual glyph width, collapsing the
-     computed font-size on every re-fit after the first. Keeping it sized
-     to its own content regardless of the parent's width breaks that
-     feedback loop. */
-  width: max-content;
-  margin: 0;
-  font-weight: 900;
-  /* Tighter letter-spacing shrinks each glyph's advance width, so the fit
-     hook has to solve for a larger font-size to still fill the same
-     target width — that increase in font-size is what actually makes the
-     glyphs taller. Stops short of desktop's old -0.13em, which packed
-     letters into each other and let the last glyph's ink overhang past
-     its own measured box, pushing the fit past the right edge. */
-  letter-spacing: -0.09em;
-  color: var(--yellow);
-  font-size: clamp(2.2em, 13vw, 5.4em);
-}
-
-.wordmark {
-  position: absolute;
-  /* top (not bottom) on purpose: this element sits inside an inline-block
-     wrapper sized by useAutoFitWordmark — pairing top with a bottom
-     offset and no explicit height would make the browser stretch the box
-     to satisfy both instead of sizing to its own content. */
-  top: 100%;
-  right: 0;
-  margin-top: 0.3em;
-  font-size: clamp(12px, 1.2vw, 20px);
-  line-height: 1;
-  font-weight: 700;
-  color: var(--black);
-  white-space: nowrap;
-}
-
 .portraitWrap {
-  width: 100%;
-  /* portrait.png is a 558×447 landscape file — height:auto on the img
-     would preserve that full letterboxed canvas (wide and short) instead
-     of the tight head-to-chest crop the design calls for. An explicit
-     taller-than-wide box + object-fit:cover on the img below crops into
-     it instead. */
-  aspect-ratio: 3 / 4;
-  margin: -20px 0 0;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 72%;
+  height: 78%;
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
 .portraitWrap img {
-  display: block;
-  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: auto;
   height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  max-width: none;
+  transform: translateX(-50%);
 }
 
 .statementRow {
+  position: absolute;
+  right: 1em;
+  bottom: 1.25em;
+  left: 1em;
+  z-index: 3;
   display: flex;
-  flex-direction: column;
-  gap: 1.5em;
-  /* Pulls the text block up so it reads directly over the lower portion
-     of the portrait (yellow-on-navy holds contrast fine) instead of
-     sitting in a clean, fully separate block below it. No max-width —
-     the tagline is meant to span across the photo, not sit in a narrow
-     column beside it; the last line naturally clears the image's bottom
-     edge once the pulled-up content's own height runs out. */
-  position: relative;
-  z-index: 2;
-  margin-top: -170px;
-  text-align: left;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1em;
+  pointer-events: none;
 }
 
-.sideCopy {
-  font-size: 1em;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+.taglineImg,
+.exploreImg {
+  width: 42%;
+  height: auto;
 }
 
-.sideCopy:first-of-type {
-  color: var(--yellow);
-  font-size: 1.3em;
+.exploreImg {
+  margin-bottom: 0.25em;
+}
+
+@media (max-width: 390px) {
+  .portraitWrap {
+    width: 82%;
+    height: 74%;
+  }
+
+  .taglineImg,
+  .exploreImg {
+    width: 45%;
+  }
 }

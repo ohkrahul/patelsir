@@ -1,8 +1,8 @@
 import styles from "./Curiosity.module.css";
 
-const CHIPS = ["AI", "HEALTH", "SCIENCE", "MUSIC"];
+const CHIPS = ["AI", "HEALTHCARE", "LIFE SCIENCES", "RESEARCH", "MUSIC"];
 const STATEMENT =
-  "Science, technology and creativity are different ways of asking the same thing: what is possible when we understand a problem deeply enough to imagine something better?";
+  "I'm interested in exploring the world beyond textbooks and classrooms through competitions, research, conversations, new experiences and following a question far enough to see where it leads.";
 
 export default function Curiosity() {
   const words = STATEMENT.split(" ");

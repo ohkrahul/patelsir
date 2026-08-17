@@ -6,7 +6,7 @@ const NAV_ITEMS = [
   { label: "ABOUT", href: "#about" },
   { label: "EXPLORATIONS", href: "#explorations" },
   { label: "INTERESTS", href: "#interests" },
-  { label: "VOICES", href: "#voices" },
+  { label: "MEDIA", href: "#voices" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -24,7 +24,8 @@ export default function DesktopSidebar() {
         >
           <span className={styles.identityLabel}>Profile</span>
           <span className={styles.identityMuted}>Ahmedabad, India</span>
-          <span className={styles.identityMuted}>Student / Explorer</span>
+          <span className={styles.identityMuted}>Class X · Adani International School</span>
+          <span className={styles.identityMuted}>Student · Researcher · Guitarist</span>
         </div>
 
         <div className={`${styles.panel} ${styles.stats}`} data-anim="sidebar-panel">
@@ -32,13 +33,19 @@ export default function DesktopSidebar() {
             <div className={styles.statValue} data-ghost="hero-stat-14">
               14
             </div>
-            <div className={styles.statLabel}>Years old</div>
+            <div className={styles.statText}>
+              <strong>Years old</strong>
+              <span>Class X student</span>
+            </div>
           </div>
           <div className={styles.stat}>
             <div className={`${styles.statValue} ${styles.gold}`} data-ghost="hero-stat-gold">
-              GOLD
+              2×
             </div>
-            <div className={styles.statLabel}>IRIS 25–26</div>
+            <div className={styles.statText}>
+              <strong>IRIS Golds</strong>
+              <span>Two consecutive years</span>
+            </div>
           </div>
         </div>
 
@@ -56,7 +63,7 @@ export default function DesktopSidebar() {
         </div>
 
         <div className={`${styles.panel} ${styles.ticker}`} data-anim="sidebar-panel">
-          AI · Healthcare · Science · Music
+          Life Sciences · Healthcare · AI · Guitar
         </div>
 
         <a href="#whats-next" className={styles.cta} data-anim="sidebar-cta">

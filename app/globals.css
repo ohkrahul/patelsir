@@ -132,7 +132,12 @@ img {
   line-height: 1em;
 }
 
-a:hover .hoverStack {
+.hoverStack span:last-child {
+  color: var(--yellow);
+}
+
+a:hover .hoverStack,
+a:focus-visible .hoverStack {
   transform: translateY(-1em);
 }
 

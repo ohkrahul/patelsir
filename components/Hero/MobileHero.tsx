@@ -1,25 +1,35 @@
-import Wordmark from "./Wordmark";
-import MobileIntro from "./MobileIntro";
 import styles from "./MobileHero.module.css";
 
 export default function MobileHero() {
   return (
     <div className={styles.wrap}>
       <div className={styles.composition}>
-        <Wordmark styles={styles} morphBound={false} />
+        <img
+          src="/hero/wordmark.png"
+          alt="Shaurya Patel"
+          className={styles.wordmarkImg}
+        />
         <div className={styles.portraitWrap}>
-          <img src="/shaurya/portrait.png" alt="Shaurya Patel" width={558} height={447} />
+          <img
+            src="/hero/character1.png"
+            alt="Shaurya Patel"
+            width={2752}
+            height={1536}
+          />
         </div>
       </div>
 
       <div className={styles.statementRow}>
-        <MobileIntro />
-        <p className={styles.sideCopy}>
-          CURIOUS BY NATURE.
-          <br />
-          BUILDING BY CHOICE.
-        </p>
-        <p className={styles.sideCopy}>Exploring science, AI, healthcare, research and music.</p>
+        <img
+          src="/hero/tagline.png"
+          alt="Curious by nature. Building by choice."
+          className={styles.taglineImg}
+        />
+        <img
+          src="/hero/explore-text.png"
+          alt="Exploring science, AI, healthcare, research and music."
+          className={styles.exploreImg}
+        />
       </div>
     </div>
   );

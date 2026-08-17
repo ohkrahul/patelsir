@@ -2,7 +2,7 @@ import { explorationCards } from "@/data/explorations";
 import ExplorationCard from "./ExplorationCard";
 import styles from "./Explorations.module.css";
 
-const HEADING_LINES = ["QUESTIONS", "TURNED INTO", "THINGS."];
+const HEADING_LINES = ["QUESTIONS", "TURNED INTO", "RESEARCH."];
 
 export default function Explorations() {
   return (
@@ -22,8 +22,9 @@ export default function Explorations() {
             ))}
           </h2>
           <p className={styles.copy} data-anim="explorations-copy">
-            A growing collection of projects, competitions, ideas and creative
-            interests—each one an excuse to learn something new.
+            Research is not about finding an answer quickly. It is about asking
+            the right question, finding evidence, checking assumptions and
+            being willing to change your thinking.
           </p>
         </div>
 

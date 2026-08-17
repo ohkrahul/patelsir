@@ -6,11 +6,11 @@ export default function Voices() {
   return (
     <section id="voices" className={styles.voices}>
       <div className={styles.header}>
-        <span className="eyebrow">VOICES</span>
+        <span className="eyebrow">MEDIA &amp; MILESTONES</span>
         <h2 className={styles.heading}>
-          ALONG
+          SHAURYA IN
           <br />
-          THE WAY.
+          THE NEWS.
         </h2>
       </div>
 

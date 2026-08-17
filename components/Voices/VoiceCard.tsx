@@ -5,7 +5,7 @@ export default function VoiceCard({ voice }: { voice: Voice }) {
   return (
     <article className={styles.card}>
       <p className={`${styles.quote} ${voice.isPlaceholder ? styles.placeholder : ""}`}>
-        &ldquo;{voice.quote}&rdquo;
+        {voice.quote}
       </p>
       <div>
         <div className={styles.name}>{voice.name}</div>

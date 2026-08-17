@@ -9,7 +9,7 @@ const LEFT_NAV = [
 
 const RIGHT_NAV = [
   { label: "INTERESTS", href: "#interests" },
-  { label: "VOICES", href: "#voices" },
+  { label: "MEDIA", href: "#voices" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -54,7 +54,7 @@ export default function DesktopHero() {
         />
         <div className={styles.portraitWrap} data-anim="hero-portrait-wrap">
           <img
-            src="/hero/portrait.png"
+            src="/hero/character1.png"
             alt="Shaurya Patel"
             width={2432}
             height={1635}

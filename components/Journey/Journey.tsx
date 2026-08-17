@@ -13,20 +13,20 @@ export default function Journey() {
     <section id="about" className={styles.journey}>
       <div className={styles.header}>
         <span className="eyebrow">
-          START CURIOUS.
+          CURIOSITY CAME FIRST.
           <br />
-          KEEP EXPLORING.
+          THE JOURNEY CONTINUES.
         </span>
         <h2 className={styles.heading}>
-          ABOUT ME (&amp;)
+          WHO IS SHAURYA? (&amp;)
           <br />
           THE JOURNEY SO FAR
         </h2>
         <p className={styles.intro}>
-          I&apos;m 14, so I&apos;m not supposed to have everything figured out yet.
-          That&apos;s what makes this interesting. I&apos;m exploring science, AI,
-          healthcare, research, technology and music by following the
-          questions that keep pulling me back.
+          I don&apos;t think I&apos;ve figured that out yet—and at 14, I don&apos;t think
+          I&apos;m supposed to. I&apos;m a student and researcher who enjoys following
+          questions wherever they lead, from life sciences and healthcare to
+          artificial intelligence, technology and music.
         </p>
       </div>
 

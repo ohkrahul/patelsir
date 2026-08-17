@@ -3,9 +3,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { Metrics } from "./metrics";
 
 const LIGHT = {
-  background: "rgba(223, 222, 206, 0.8)",
+  background: "rgba(102, 80, 63, 0.92)",
   borderColor: "rgba(255, 255, 255, 0.2)",
-  color: "#000000",
+  color: "#f8e8dc",
 };
 
 const DARK = {

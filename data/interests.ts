@@ -8,20 +8,20 @@ export type InterestCard = {
 export const interestCards: InterestCard[] = [
   {
     id: "science-health",
-    title: "SCIENCE × HEALTH",
-    points: ["Biology", "Healthcare innovation", "Research", "Prevention", "Human problems"],
-    footer: "Understanding the problem before trying to solve it.",
+    title: "LIFE SCIENCES × HEALTHCARE",
+    points: ["Human biology", "Preventive health", "Metabolic health", "Clinical research", "Better outcomes"],
+    footer: "Understanding the science behind the human body.",
   },
   {
     id: "ai-technology",
     title: "AI × TECHNOLOGY",
-    points: ["Artificial intelligence", "Data", "Pattern recognition", "Digital tools", "Experimentation"],
-    footer: "Exploring what computation can reveal.",
+    points: ["Artificial intelligence", "Data", "Pattern recognition", "Digital health", "Meaningful problems"],
+    footer: "Exploring how machines recognise patterns and learn from information.",
   },
   {
-    id: "music-ideas",
-    title: "MUSIC × IDEAS",
-    points: ["Guitar", "Creativity", "Expression", "Entrepreneurship", "Leadership"],
-    footer: "Not every useful idea begins with a dataset.",
+    id: "research-music",
+    title: "RESEARCH × MUSIC",
+    points: ["Questions", "Evidence", "Guitar", "Creativity", "Expression"],
+    footer: "Different ways to experiment, learn and think.",
   },
 ];

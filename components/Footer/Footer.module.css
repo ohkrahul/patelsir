@@ -6,12 +6,12 @@
 .wordmark {
   position: relative;
   z-index: 2;
-  font-size: clamp(3em, 21vw, 19em);
-  font-weight: 900;
-  line-height: 0.85;
-  letter-spacing: -0.02em;
-  text-align: center;
-  color: var(--black);
+  width: 100%;
+}
+
+.wordmark img {
+  width: 100%;
+  height: auto;
 }
 
 .copyRow {
@@ -26,5 +26,5 @@
 .tagline {
   margin-top: 0.5em;
   font-size: 1em;
-  color: var(--muted);
+  color: #f8e8dc;
 }

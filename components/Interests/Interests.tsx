@@ -17,8 +17,8 @@ export default function Interests() {
           </span>
         </h2>
         <p className={styles.intro}>
-          These are not fixed career labels. They&apos;re simply the areas
-          Shaurya keeps returning to right now.
+          I don&apos;t want to define myself by one career or one subject at 14.
+          These are the questions and interests I keep returning to right now.
         </p>
       </div>
 

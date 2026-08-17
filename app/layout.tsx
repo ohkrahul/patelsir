@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Shaurya Patel",
   description:
-    "Shaurya Patel — 14, student at Adani International School, Ahmedabad. Exploring science, AI, healthcare, research and music.",
+    "Shaurya Patel — Class X student, researcher, innovator and guitarist from Ahmedabad, exploring life sciences, healthcare and artificial intelligence.",
 };
 
 const bootScript = `

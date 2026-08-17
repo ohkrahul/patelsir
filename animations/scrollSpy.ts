@@ -8,8 +8,8 @@ const ACTIVE_COLOR = "#ffff23";
 // whatever light/dark theme the sidebar panel underneath switches to (see
 // themeSwitcher.ts) — black inactive text is invisible against Explorations'
 // dark panel background, so it needs its own dark-aware value here too.
-const INACTIVE_COLOR_LIGHT = "#000000";
-const INACTIVE_COLOR_DARK = "#a6a6a6"; // matches var(--muted)
+const INACTIVE_COLOR_LIGHT = "#f8e8dc";
+const INACTIVE_COLOR_DARK = "#f8e8dc";
 const INACTIVE_OPACITY = 0.45;
 
 export type ScrollSpyHandle = {

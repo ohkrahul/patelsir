@@ -3,16 +3,14 @@ import styles from "./FutureCTA.module.css";
 export default function FutureCTA() {
   return (
     <section id="whats-next" className={styles.cta}>
-      <h2 className={styles.heading}>WHAT&apos;S NEXT?</h2>
-      <h2 className={styles.secondary}>STILL EXPLORING.</h2>
+      <h2 className={styles.heading}>LET&apos;S CONNECT.</h2>
+      <h2 className={styles.secondary}>GET IN TOUCH.</h2>
       <p className={styles.copy}>
-        The goal isn&apos;t to choose one path too early. It&apos;s to keep
-        learning, building, competing, experimenting and noticing which
-        questions become impossible to ignore.
+        Interested in Shaurya&apos;s research, projects or journey? For media,
+        academic collaborations, research conversations or other professional
+        enquiries, please get in touch through a parent or guardian.
       </p>
-      <a href="#about" className={styles.button}>
-        KEEP EXPLORING →
-      </a>
+      <span className={styles.button}>GUARDIAN-MANAGED EMAIL COMING SOON</span>
     </section>
   );
 }

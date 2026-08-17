@@ -118,15 +118,17 @@
 }
 
 .portraitWrap img {
-  width: 100%;
+  position: absolute;
+  left: 50%;
+  width: auto;
   height: 100%;
-  object-fit: cover;
+  max-width: none;
+  transform: translateX(-50%);
   /* The source asset's subject isn't centered in its own frame — there's
      a chunk of the diagonal-cut backdrop shape to their right with no
      one in it. Centering the crop on the image's own midpoint (50%) crops
      off-center on the person; shifting the focus left keeps them centered
      in the visible box instead. */
-  object-position: 38% top;
 }
 
 .statementRow {

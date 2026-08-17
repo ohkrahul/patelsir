@@ -44,10 +44,11 @@
 }
 
 .panel {
-  background: #d9d9d9;
+  background: #66503f;
   border: 1px solid var(--light-border);
   border-radius: 0.475em;
   padding: 1em;
+  color: #f8e8dc;
 }
 
 .logo {
@@ -82,34 +83,59 @@
 }
 
 .identityMuted {
-  color: var(--muted);
+  color: #f8e8dc;
 }
 
 .stats {
   display: flex;
-  gap: 0.6em;
+  flex-direction: column;
+  gap: 0;
 }
 
 .stat {
-  flex: 1;
-  text-align: center;
+  display: grid;
+  grid-template-columns: 3.25em minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75em;
+  padding: 0.3em 0;
+  text-align: left;
+}
+
+.stat + .stat {
+  margin-top: 0.75em;
+  padding-top: 1em;
+  border-top: 1px solid rgb(248 232 220 / 0.18);
 }
 
 .statValue {
   font-family: var(--font-display);
-  font-size: 1.6em;
+  font-size: 2em;
   font-weight: 800;
+  line-height: 1;
+  text-align: center;
 }
 
 .gold {
   color: var(--gold);
 }
 
-.statLabel {
-  font-size: 0.7em;
-  letter-spacing: 0.05em;
+.statText {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.1em;
+  font-size: 0.68em;
+  line-height: 1.25;
   text-transform: uppercase;
-  color: var(--muted);
+}
+
+.statText strong {
+  font-size: 1.1em;
+  letter-spacing: 0.04em;
+}
+
+.statText span {
+  color: #f8e8dc;
 }
 
 .nav {
@@ -136,14 +162,14 @@
 
 .navLink:hover,
 .navLink:focus-visible {
-  background: var(--nav-item-light);
+  background: rgb(255 255 255 / 0.12);
 }
 
 .ticker {
   font-size: 0.7em;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #f8e8dc;
 }
 
 .cta {
