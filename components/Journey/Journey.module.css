@@ -11,6 +11,16 @@
   z-index: 42;
 }
 
+@media (max-width: 767px) {
+  .journey {
+    padding: 2.25em 0 3.5em;
+  }
+
+  .journey .header {
+    margin-bottom: 2em;
+  }
+}
+
 @media (min-width: 768px) {
   .journey {
     margin-top: -1170px;
@@ -39,4 +49,3 @@
   flex-direction: column;
   gap: 2.5em;
 }
-

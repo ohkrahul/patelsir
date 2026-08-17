@@ -145,6 +145,39 @@ export function createJourneyAnimations(): JourneyHandle | null {
     }
   }
 
+  // The connecting path is desktop-only. On mobile, revealing every card
+  // from one section-wide progress value makes a card wait until it is far
+  // up the viewport before its threshold is reached. Give each card its own
+  // early trigger so it is readable as soon as it enters the screen.
+  if (window.innerWidth < 768) {
+    gsap.set(cards, { y: "5%", opacity: 0, scale: 0.96 });
+
+    cards.forEach((card) => {
+      const tween = gsap.to(card, {
+        y: "0%",
+        opacity: 1,
+        scale: 1,
+        duration: 0.45,
+        ease: "power2.out",
+        onComplete: () => gsap.set(card, { clearProps: "transform" }),
+        scrollTrigger: {
+          trigger: card,
+          start: "top 95%",
+          once: true,
+        },
+      });
+      if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
+    });
+
+    return {
+      destroy: () => {
+        triggers.forEach((trigger) => trigger.kill());
+        gsap.killTweensOf(cards);
+        gsap.set(cards, { clearProps: "all" });
+      },
+    };
+  }
+
   // Each card's reveal is driven off the same number the line's own draw
   // length is (arc-length fraction along the curve), not off self.progress
   // independently — a separate, merely-tuned scroll-progress window can

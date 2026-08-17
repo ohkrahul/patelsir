@@ -33,6 +33,66 @@ export function createInterestsAnimations(): InterestsHandle | null {
 
   const ease = gsap.parseEase("power2.out");
 
+  if (window.innerWidth < 768) {
+    const timelines: gsap.core.Timeline[] = [];
+
+    gsap.set(cards, { y: "5%", opacity: 0, scale: 0.96 });
+    pointsByCard.forEach((points) => gsap.set(points, { opacity: 0, y: 6 }));
+    gsap.set(headingLines, { x: 30, opacity: 0 });
+
+    if (headingLines.length) {
+      const headingTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 92%",
+          once: true,
+        },
+      });
+      headingTimeline.to(headingLines, {
+        x: 0,
+        opacity: 1,
+        duration: 0.4,
+        stagger: 0.06,
+        ease: "power2.out",
+      });
+      timelines.push(headingTimeline);
+    }
+
+    cards.forEach((card, index) => {
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: card,
+          start: "top 95%",
+          once: true,
+        },
+      });
+      timeline.to(card, {
+        y: "0%",
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        ease: "power2.out",
+        onComplete: () => gsap.set(card, { clearProps: "transform" }),
+      });
+      timeline.to(
+        pointsByCard[index],
+        { opacity: 1, y: 0, duration: 0.25, stagger: 0.04, ease: "power2.out" },
+        0.08
+      );
+      timelines.push(timeline);
+    });
+
+    return {
+      destroy: () => {
+        timelines.forEach((timeline) => {
+          timeline.scrollTrigger?.kill();
+          timeline.kill();
+        });
+        gsap.set([...cards, ...pointsByCard.flat(), ...headingLines], { clearProps: "all" });
+      },
+    };
+  }
+
   gsap.set(cards, { y: "10%", opacity: 0, scale: 0.6 });
   pointsByCard.forEach((points) => {
     if (points.length) gsap.set(points, { opacity: 0, y: 6 });

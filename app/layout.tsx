@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { archivo, caveat, switzer } from "./fonts";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 export const metadata: Metadata = {

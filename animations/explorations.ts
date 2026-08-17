@@ -47,7 +47,8 @@ export function createExplorationsAnimations(): ExplorationsHandle | null {
 
     const introTrigger = ScrollTrigger.create({
       trigger: section,
-      start: "top top",
+      start: () => (window.innerWidth < 768 ? "top 92%" : "top top"),
+      invalidateOnRefresh: true,
       onEnter: () => introTl.play(),
       onLeaveBack: () => introTl.reverse(),
     });
@@ -147,12 +148,12 @@ export function createExplorationsAnimations(): ExplorationsHandle | null {
         y: "0%",
         opacity: 1,
         scale: 1,
-        duration: 0.9,
+        duration: 0.5,
         ease: "expo.out",
         onComplete: () => gsap.set(card, { clearProps: "transform" }),
         scrollTrigger: {
           trigger: card,
-          start: "top 88%",
+          start: "top 95%",
           once: true,
         },
       });

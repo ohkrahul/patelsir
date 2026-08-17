@@ -3,6 +3,12 @@
   min-height: 100vh;
 }
 
+@media (max-width: 767px) {
+  .hero {
+    min-height: calc(100svh - 72px);
+  }
+}
+
 @media (min-width: 768px) {
   .hero {
     min-height: 2700px;

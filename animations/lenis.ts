@@ -13,10 +13,20 @@ export type LenisEngine = {
 };
 
 export function createLenisEngine(): LenisEngine {
+  const usesTouch = window.matchMedia("(pointer: coarse)").matches;
+
   const lenis = new Lenis({
     duration: 0.4,
     easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
+    // Wheel smoothing alone leaves touch scrolling native while the GSAP
+    // sections update on a separate animation frame, which reads as small
+    // jumps on mobile. syncTouch keeps both on the same frame loop; a higher
+    // lerp than Lenis's default keeps it responsive instead of feeling heavy.
+    syncTouch: usesTouch,
+    syncTouchLerp: 0.12,
+    touchInertiaExponent: 1.5,
+    touchMultiplier: 1,
   });
 
   lenis.on("scroll", ScrollTrigger.update);
