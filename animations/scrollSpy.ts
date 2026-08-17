@@ -26,7 +26,15 @@ export function createScrollSpy(): ScrollSpyHandle | null {
     return document.querySelectorAll<HTMLElement>(`[data-anim="hero-${id}"]`);
   }
 
-  const allLinks = NAV_IDS.flatMap((id) => Array.from(linksFor(id)));
+  // MobileNav's overlay links use a separate attribute rather than
+  // reusing data-anim="hero-*" — heroMorph.ts looks up that attribute with
+  // a singular querySelector, so a second matching element (even a
+  // display:none one) risks it grabbing the wrong node on desktop.
+  function mobileLinksFor(id: string) {
+    return document.querySelectorAll<HTMLElement>(`[data-mobile-nav="${id}"]`);
+  }
+
+  const allLinks = NAV_IDS.flatMap((id) => [...linksFor(id), ...mobileLinksFor(id)]);
   let current: string | null = null;
 
   function update() {
@@ -58,6 +66,13 @@ export function createScrollSpy(): ScrollSpyHandle | null {
       gsap.to(linksFor(id), {
         opacity: isActive ? 1 : INACTIVE_OPACITY,
         color: isActive ? ACTIVE_COLOR : inactiveColor,
+        duration: 0.3,
+      });
+      // MobileNav's overlay always sits on the sand background (never
+      // Explorations' dark panel), and its inactive rows read as solid
+      // black rather than dimmed — no opacity/dark-section handling needed.
+      gsap.to(mobileLinksFor(id), {
+        color: isActive ? ACTIVE_COLOR : INACTIVE_COLOR_LIGHT,
         duration: 0.3,
       });
     });

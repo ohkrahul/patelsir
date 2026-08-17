@@ -15,11 +15,8 @@
   }
 }
 
-/* animations/sidebar.ts scales THIS, not .sidebar — putting `transform`
-   and .sidebar's `overflow: hidden` on the same element makes Chromium
-   fail to composite the panels' backdrop-filter correctly past a point
-   in the scaled box, silently dropping the glass background under the
-   lower nav links (their text still renders fine, just not the blur). */
+/* animations/sidebar.ts scales THIS, not .sidebar — see that file for why
+   transform and .sidebar's `overflow: hidden` can't share an element. */
 .sidebarInner {
   display: flex;
   flex-direction: column;
@@ -47,9 +44,7 @@
 }
 
 .panel {
-  background: var(--card-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: #d9d9d9;
   border: 1px solid var(--light-border);
   border-radius: 0.475em;
   padding: 1em;

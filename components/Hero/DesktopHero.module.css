@@ -1,0 +1,151 @@
+.heroSticky {
+  /* Hidden below the desktop breakpoint — MobileHero renders the whole
+     mobile layout independently, so without this both components paint
+     on top of each other below 768px. */
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .heroSticky {
+    display: block;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: #b69677;
+    /* position: sticky unconditionally creates a stacking context, even
+       with no z-index set (unlike relative/absolute, which only do so
+       once z-index is non-auto). Left at the default level (0), the
+       whole sidebar subtree (z-index: 40) paints above the whole hero
+       subtree regardless of what z-index heroMorph gives the individual
+       traveling nav links/wordmark inside it — this has to clear that,
+       not just match it, so the internal 40-50 hierarchy actually means
+       something once compared against the sidebar from outside. */
+    z-index: 41;
+  }
+}
+
+.navRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+  min-height: 2.5em;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 40%;
+  padding: 0 2.5em;
+  /* Above heroMorph's highest z-index (45) — a lower value here would cap
+     the fixed nav links' own z-index at this stacking context's level
+     for any comparison against siblings outside it (e.g. the wordmark),
+     no matter how high their own z-index is set to. */
+  z-index: 50;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+/* heroMorph.ts promotes these nav links to position:fixed the instant
+   the page boots (they're part of the sidebar FLIP migration), which
+   pulls them out of their <li>'s normal flow — sizing/aligning a
+   separator against the <li> itself (e.g. a flex child or ::after on
+   the <li>) ends up positioned against that now-hollow box instead of
+   where the link actually renders. A border on the link itself always
+   tracks the link's real visual position regardless of what heroMorph
+   does to its layout. Every item gets one, including each list's own
+   last item (ABOUT, FAQ) — the two <ul>s sit far apart in this row, but
+   once heroMorph migrates them into the sidebar they stack into a single
+   continuous vertical list, and leaving gaps at each list's own boundary
+   would look inconsistent there. */
+.navList li a {
+  position: relative;
+  padding-right: 1.5em;
+}
+
+.navList li a::after {
+  /* A border spans the link's full line-box height (ascender to
+     descender), taller than the actual letters — an absolutely
+     positioned, explicitly sized mark matches the text's height
+     instead. HoverText's .hoverMask is vertical-align:top and only 1em
+     tall, so the visible text sits at the TOP of the link's (taller)
+     line-box, not centered in it — centering this mark on 0.5em from
+     the top (the mask's own center), not 50% of the whole box, is what
+     actually lines it up with the letters instead of sitting low. */
+  content: "";
+  position: absolute;
+  top: 0.5em;
+  right: 0.6em;
+  width: 1.5px;
+  height: 0.7em;
+  transform: translateY(-50%);
+  background: rgb(0 0 0 / 0.4);
+}
+
+.composition {
+  position: absolute;
+  inset: 0;
+}
+
+.wordmarkImg {
+  /* heroMorph.ts promotes this element to position:fixed with an explicit
+     inline `top`/`left`/`width` the instant it boots, even at rest — this
+     rest position is what it measures as the FLIP's "from" state. */
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  width: calc(100% - 40px);
+  height: auto;
+  z-index: 1;
+}
+
+.portraitWrap {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26%;
+  aspect-ratio: 3 / 4;
+  /* Above the wordmark's morph z-index (40, set inline by heroMorph.ts
+     once it's fixed-position) so the portrait stays in front of it
+     through the whole scroll, not just at rest. Below the nav row (50)
+     and stat cards (46) so those keep reading on top of the photo. */
+  z-index: 43;
+}
+
+.portraitWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* The source asset's subject isn't centered in its own frame — there's
+     a chunk of the diagonal-cut backdrop shape to their right with no
+     one in it. Centering the crop on the image's own midpoint (50%) crops
+     off-center on the person; shifting the focus left keeps them centered
+     in the visible box instead. */
+  object-position: 38% top;
+}
+
+.statementRow {
+  display: contents;
+}
+
+.taglineImg,
+.exploreImg {
+  position: absolute;
+  bottom: 3em;
+  z-index: 3;
+  max-width: 22%;
+  height: auto;
+}
+
+.taglineImg {
+  right: 64%;
+}
+
+.exploreImg {
+  left: 64%;
+}
