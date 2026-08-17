@@ -13,7 +13,7 @@ export function createCuriosityAnimations(): CuriosityHandle | null {
   const words = Array.from(document.querySelectorAll<HTMLElement>('[data-anim="curiosity-word"]'));
   if (!section || !words.length) return null;
 
-  gsap.set(words, { color: "rgba(0, 0, 0, 0.25)" });
+  gsap.set(words, { color: "rgba(0, 0, 0, 0.08)" });
 
   const tween = gsap.to(words, {
     color: "rgba(0, 0, 0, 1)",

@@ -11,6 +11,9 @@ export const metadata: Metadata = {
 
 const bootScript = `
 history.scrollRestoration = "manual";
+if (window.location.hash) {
+  history.replaceState(null, "", window.location.pathname + window.location.search);
+}
 window.scrollTo(0, 0);
 document.body.classList.add("js");
 `;

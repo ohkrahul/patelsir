@@ -9,7 +9,7 @@
 
 .secondary {
   font-size: clamp(1.6em, 8vw, 4em);
-  color: var(--muted);
+  color: #f8e8dc;
 }
 
 .copy {

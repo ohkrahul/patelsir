@@ -11,6 +11,7 @@ import { createJourneyAnimations } from "@/animations/journey";
 import { createExplorationsAnimations } from "@/animations/explorations";
 import { createCuriosityAnimations } from "@/animations/curiosity";
 import { createInterestsAnimations } from "@/animations/interests";
+import { createVoicesAnimations } from "@/animations/voices";
 import { createScrollSpy } from "@/animations/scrollSpy";
 import { playPreloader, type PreloaderHandle } from "@/animations/preloader";
 import { MOTION, isDesktopMotionActive, prefersReducedMotion } from "@/animations/config";
@@ -28,6 +29,7 @@ export function useAnimationEngine() {
     let explorationsHandle: Handle | null = null;
     let curiosityHandle: Handle | null = null;
     let interestsHandle: Handle | null = null;
+    let voicesHandle: Handle | null = null;
     let scrollSpyHandle: Handle | null = null;
     let preloaderHandle: PreloaderHandle | null = null;
 
@@ -88,6 +90,7 @@ export function useAnimationEngine() {
       journeyHandle = createJourneyAnimations();
       curiosityHandle = createCuriosityAnimations();
       interestsHandle = createInterestsAnimations();
+      voicesHandle = createVoicesAnimations();
       scrollSpyHandle = createScrollSpy();
       ScrollTrigger.refresh();
 
@@ -133,6 +136,7 @@ export function useAnimationEngine() {
       explorationsHandle?.destroy();
       curiosityHandle?.destroy();
       interestsHandle?.destroy();
+      voicesHandle?.destroy();
       scrollSpyHandle?.destroy();
       lenisEngine.destroy();
     };

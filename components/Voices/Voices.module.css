@@ -11,8 +11,56 @@
   margin-top: 0.4em;
 }
 
+.headingMask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.headingLine {
+  display: inline-block;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5em;
+}
+
+.rails {
+  display: grid;
+  gap: 1.5em;
+}
+
+@media (max-width: 767px) {
+  .voices {
+    padding: 0;
+  }
+
+  .sticky {
+    position: sticky;
+    top: 72px;
+    height: min(calc(100svh - 72px), 650px);
+    padding: 2em 0;
+    overflow: hidden;
+  }
+
+  .header {
+    margin-bottom: 1em;
+  }
+
+  .rails {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
+  }
+
+  .grid {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    gap: 0.9em;
+    padding-right: 1.25em;
+    will-change: transform;
+  }
 }

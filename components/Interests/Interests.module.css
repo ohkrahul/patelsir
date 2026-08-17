@@ -30,15 +30,32 @@
 
 @media (max-width: 767px) {
   .interests {
-    padding: 3.5em 0;
+    padding: 0;
+  }
+
+  .sticky {
+    position: sticky;
+    top: 72px;
+    height: calc(100svh - 72px);
+    padding: 1.75em 0;
+    overflow: hidden;
   }
 
   .header {
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
   }
 
   .grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    align-items: stretch;
+    width: max-content;
     gap: 1em;
+    padding-right: 1.25em;
+    will-change: transform;
+  }
+
+  .grid > * {
+    width: calc(100vw - 5em);
+    flex: 0 0 calc(100vw - 5em);
   }
 }

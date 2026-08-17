@@ -34,60 +34,56 @@ export function createInterestsAnimations(): InterestsHandle | null {
   const ease = gsap.parseEase("power2.out");
 
   if (window.innerWidth < 768) {
-    const timelines: gsap.core.Timeline[] = [];
+    const sticky = document.querySelector<HTMLElement>('[data-anim="interests-sticky"]');
+    const track = document.querySelector<HTMLElement>('[data-anim="interests-track"]');
+    if (!sticky || !track) return null;
 
-    gsap.set(cards, { y: "5%", opacity: 0, scale: 0.96 });
-    pointsByCard.forEach((points) => gsap.set(points, { opacity: 0, y: 6 }));
-    gsap.set(headingLines, { x: 30, opacity: 0 });
+    gsap.set([...cards, ...pointsByCard.flat()], { clearProps: "all" });
 
-    if (headingLines.length) {
-      const headingTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 92%",
-          once: true,
-        },
-      });
-      headingTimeline.to(headingLines, {
+    const getDistance = () => Math.max(0, track.scrollWidth - sticky.clientWidth);
+    const applyHeight = () => {
+      section.style.height = `${sticky.clientHeight + getDistance()}px`;
+    };
+    applyHeight();
+
+    const trackTween = gsap.to(track, {
+      x: () => -getDistance(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 72px",
+        end: () => `+=${getDistance()}`,
+        scrub: 0.55,
+        invalidateOnRefresh: true,
+        onRefreshInit: applyHeight,
+      },
+    });
+
+    const headingTween = gsap.fromTo(
+      headingLines,
+      { x: 30, opacity: 0 },
+      {
         x: 0,
         opacity: 1,
-        duration: 0.4,
-        stagger: 0.06,
+        duration: 0.45,
+        stagger: 0.07,
         ease: "power2.out",
-      });
-      timelines.push(headingTimeline);
-    }
-
-    cards.forEach((card, index) => {
-      const timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: card,
-          start: "top 95%",
+          trigger: section,
+          start: "top 90%",
           once: true,
         },
-      });
-      timeline.to(card, {
-        y: "0%",
-        opacity: 1,
-        scale: 1,
-        duration: 0.4,
-        ease: "power2.out",
-        onComplete: () => gsap.set(card, { clearProps: "transform" }),
-      });
-      timeline.to(
-        pointsByCard[index],
-        { opacity: 1, y: 0, duration: 0.25, stagger: 0.04, ease: "power2.out" },
-        0.08
-      );
-      timelines.push(timeline);
-    });
+      }
+    );
 
     return {
       destroy: () => {
-        timelines.forEach((timeline) => {
-          timeline.scrollTrigger?.kill();
-          timeline.kill();
-        });
+        trackTween.scrollTrigger?.kill();
+        trackTween.kill();
+        headingTween.scrollTrigger?.kill();
+        headingTween.kill();
+        section.style.removeProperty("height");
+        gsap.set(track, { clearProps: "transform" });
         gsap.set([...cards, ...pointsByCard.flat(), ...headingLines], { clearProps: "all" });
       },
     };

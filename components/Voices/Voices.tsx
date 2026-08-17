@@ -3,21 +3,37 @@ import VoiceCard from "./VoiceCard";
 import styles from "./Voices.module.css";
 
 export default function Voices() {
+  const leftRow = voices.filter((_, index) => index % 2 === 0);
+  const rightRow = voices.filter((_, index) => index % 2 === 1);
+
   return (
     <section id="voices" className={styles.voices}>
-      <div className={styles.header}>
-        <span className="eyebrow">MEDIA &amp; MILESTONES</span>
-        <h2 className={styles.heading}>
-          SHAURYA IN
-          <br />
-          THE NEWS.
-        </h2>
-      </div>
+      <div className={styles.sticky} data-anim="voices-sticky">
+        <div className={styles.header}>
+          <span className="eyebrow" data-anim="voices-label">MEDIA &amp; MILESTONES</span>
+          <h2 className={styles.heading}>
+            <span className={styles.headingMask}>
+              <span className={styles.headingLine} data-anim="voices-heading-line">SHAURYA IN</span>
+            </span>
+            <br />
+            <span className={styles.headingMask}>
+              <span className={styles.headingLine} data-anim="voices-heading-line">THE NEWS.</span>
+            </span>
+          </h2>
+        </div>
 
-      <div className={styles.grid}>
-        {voices.map((voice) => (
-          <VoiceCard key={voice.id} voice={voice} />
-        ))}
+        <div className={styles.rails}>
+          <div className={styles.grid} data-anim="voices-track-left">
+            {leftRow.map((voice) => (
+              <VoiceCard key={voice.id} voice={voice} />
+            ))}
+          </div>
+          <div className={styles.grid} data-anim="voices-track-right">
+            {rightRow.map((voice) => (
+              <VoiceCard key={voice.id} voice={voice} />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

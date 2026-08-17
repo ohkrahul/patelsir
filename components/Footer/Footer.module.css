@@ -28,3 +28,9 @@
   font-size: 1em;
   color: #f8e8dc;
 }
+
+@media (max-width: 767px) {
+  .footer {
+    padding-top: 2em;
+  }
+}
